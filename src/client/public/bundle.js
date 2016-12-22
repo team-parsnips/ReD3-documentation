@@ -22133,7 +22133,7 @@
 	      var svg = d3.select('.voronoi');
 	      var voronoi = d3.voronoi().extent([[-1, -1], [960 + 1, 500 + 1]]);
 	      var polygon = svg.append('g').attr('className', 'polygon').selectAll('path').data(voronoi.polygons(this.state.dataSet)).enter().append('path').attr('fill', 'none').attr('stroke', '#000').call(this.redrawPolygon);
-	      var link = svg.append('g').attr('className', 'links').select('line').data(voronoi.links(this.state.dataSet)).enter().append('line').attr('stroke', '#000').attr('stroke-opacity', '1').call(this.redrawLink);
+	      var link = svg.append('g').attr('className', 'links').selectAll('line').data(voronoi.links(this.state.dataSet)).enter().append('line').attr('stroke', '#000').attr('stroke-opacity', '0.2').call(this.redrawLink);
 	      var site = svg.append('g').attr('className', 'sites').selectAll('circle').data(this.state.dataSet).enter().append('circle').attr('r', 2.5).attr('fill', '#000').attr('stroke', '#fff').call(this.redrawSite);
 	
 	      this.setState({
