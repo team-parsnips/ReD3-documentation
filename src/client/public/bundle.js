@@ -61,6 +61,10 @@
 	
 	var _voronoi2 = _interopRequireDefault(_voronoi);
 	
+	var _sunburst = __webpack_require__(/*! ./sunburst/sunburst.jsx */ 180);
+	
+	var _sunburst2 = _interopRequireDefault(_sunburst);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -84,7 +88,8 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_voronoi2.default, null)
+	        _react2.default.createElement(_voronoi2.default, null),
+	        _react2.default.createElement(_sunburst2.default, null)
 	      );
 	    }
 	  }]);
@@ -38612,6 +38617,158 @@
 	
 	})));
 
+
+/***/ },
+/* 180 */
+/*!**********************************************!*\
+  !*** ./src/client/app/sunburst/sunburst.jsx ***!
+  \**********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _d = __webpack_require__(/*! d3 */ 179);
+	
+	var d3 = _interopRequireWildcard(_d);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var SunBurst = function (_React$Component) {
+	  _inherits(SunBurst, _React$Component);
+	
+	  function SunBurst() {
+	    _classCallCheck(this, SunBurst);
+	
+	    return _possibleConstructorReturn(this, (SunBurst.__proto__ || Object.getPrototypeOf(SunBurst)).call(this));
+	  }
+	
+	  _createClass(SunBurst, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var width = 960,
+	          height = 700,
+	          radius = Math.min(width, height) / 2,
+	          color = d3.scaleOrdinal(d3.schemeCategory20);
+	
+	      var x = d3.scaleLinear().range([0, 2 * Math.PI]);
+	
+	      var y = d3.scaleSqrt().range([0, radius]);
+	
+	      var svg = d3.select("body").append("svg").attr("width", width).attr("height", height).append("g").attr("transform", "translate(" + width / 2 + "," + (height / 2 + 10) + ")");
+	
+	      var partition = d3.partition();
+	
+	      var arc = d3.arc().startAngle(function (d) {
+	        return Math.max(0, Math.min(2 * Math.PI, x(d.x0)));
+	      }).endAngle(function (d) {
+	        return Math.max(0, Math.min(2 * Math.PI, x(d.x1)));
+	      }).innerRadius(function (d) {
+	        return Math.max(0, y(d.y0));
+	      }).outerRadius(function (d) {
+	        return Math.max(0, y(d.y1));
+	      });
+	
+	      var root = d3.hierarchy(window.flare);
+	      root.sum(function (d) {
+	        return d.size;
+	      });
+	
+	      var g = svg.selectAll("g").data(partition(root).descendants()).enter().append("g");
+	
+	      var path = g.append("path").attr("d", arc).style("fill", function (d) {
+	        return color((d.children ? d : d.parent).data.name);
+	      }).on("click", click);
+	
+	      var text = g.append("text").attr("transform", function (d) {
+	        return "rotate(" + computeTextRotation(d) + ")";
+	      }).attr("x", function (d) {
+	        return y(d.y0);
+	      }).attr("dx", "6") // margin
+	      .attr("dy", ".35em") // vertical-align
+	      .text(function (d) {
+	        return d.data.name;
+	      });
+	
+	      // NOT WORKING
+	      /*    d3.selectAll("input").on("change", function change() {
+	            var value = this.value === "count"
+	                ? function() { return 1; }
+	                : function(d) { return d.size; };
+	      
+	            path
+	                .data(partition.value(value).nodes)
+	              .transition()
+	                .duration(1000)
+	                .attrTween("d", arcTweenData);
+	          });*/
+	
+	      function computeTextRotation(d) {
+	        var dx = d.x1 - d.x0;
+	        return (x(d.x0 + dx / 2) - Math.PI / 2) / Math.PI * 180;
+	      }
+	
+	      function click(d) {
+	        // fade out all text elements
+	        text.transition().attr("opacity", 0);
+	
+	        function arcTween(d) {
+	          var xd = d3.interpolate(x.domain(), [d.x0, d.x1]),
+	              yd = d3.interpolate(y.domain(), [d.y0, 1]),
+	              yr = d3.interpolate(y.range(), [d.y0 ? 20 : 0, radius]);
+	          return function (d, i) {
+	            return i ? function (t) {
+	              return arc(d);
+	            } : function (t) {
+	              x.domain(xd(t));y.domain(yd(t)).range(yr(t));return arc(d);
+	            };
+	          };
+	        }
+	
+	        path.transition().duration(750).attrTween("d", arcTween(d)).on("end", function (e, i) {
+	          // check if the animated element's data e lies within the visible angle span given in d
+	          var dx = d.x1 - d.x0;
+	          if (e.x0 >= d.x0 && e.x0 < d.x0 + dx) {
+	            // get a selection of the associated text element
+	            var arcText = d3.select(this.parentNode).select("text");
+	            // fade in the text element and recalculate positions
+	            arcText.transition().duration(750).attr("opacity", 1).attr("transform", function () {
+	              return "rotate(" + computeTextRotation(e) + ")";
+	            }).attr("x", function (d) {
+	              return y(d.y0);
+	            });
+	          }
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement('div', null);
+	    }
+	  }]);
+	
+	  return SunBurst;
+	}(_react2.default.Component);
+	
+	exports.default = SunBurst;
 
 /***/ }
 /******/ ]);
