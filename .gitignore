@@ -38,5 +38,5 @@ jspm_packages
 .node_repl_history
 
 # WebPack Build
-src/client/public/bundle.js
-src/client/public/bundle.js.map
+bundle.js
+bundle.js.map
