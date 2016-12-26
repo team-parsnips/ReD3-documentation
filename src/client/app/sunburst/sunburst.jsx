@@ -2,15 +2,19 @@ import React from 'react';
 import * as d3 from 'd3';
 
 class SunBurst extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = {
+      width: this.props.width || 960,
+      height: this.props.height || 700,
+    }
   }
 
   componentDidMount() {
-    var width = 960,
-      height = 700,
-      radius = Math.min(width, height) / 2,
-      color = d3.scaleOrdinal(d3.schemeCategory20);
+    var width = this.state.width;
+    var height = this.state.height;
+    var radius = Math.min(width, height) / 2;
+    var color = d3.scaleOrdinal(d3.schemeCategory20);
 
     var x = d3.scaleLinear()
         .range([0, 2 * Math.PI]);
@@ -106,7 +110,10 @@ class SunBurst extends React.Component {
   }
   render() {
     return (
-      <div></div>
+      <svg
+      width={this.state.width}
+      height={this.state.height}
+      className={'sunburst'} />
     );
   }
 }
