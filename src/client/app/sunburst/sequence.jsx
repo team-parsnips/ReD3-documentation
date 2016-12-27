@@ -1,6 +1,18 @@
 import React from 'react';
 import * as d3 from 'd3';
 
+const explanationStyle = {
+  position: 'absolute',
+  top: '260px',
+  left: '305px',
+  width: '140px',
+  textAlign: 'center',
+  color: '#666',
+  zIndex: -1,
+  visibility: 'hidden',
+}
+
+
 class SequenceSunBurst extends React.Component {
   constructor() {
     super();
@@ -15,7 +27,7 @@ class SequenceSunBurst extends React.Component {
     var x = d3.scaleLinear()
         .range([0, 2 * Math.PI]);
 
-    var y = d3.scaleSqrt()
+    var y = d3.scaleLinear()
         .range([0, radius]);
 
     // Breadcrumb dimensions: width, height, spacing, width of tip/tail.
@@ -50,7 +62,6 @@ class SequenceSunBurst extends React.Component {
         .endAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x1))); })
         .innerRadius(function(d) { return Math.max(0, y(d.y0)); })
         .outerRadius(function(d) { return Math.max(0, y(d.y1)); });
-
     // Use d3.text and d3.csv.parseRows so that we do not need to have a header
     // row, and can receive the csv as an array of arrays.
 /*    d3.text("visit-sequences.csv", function(text) {
@@ -81,28 +92,47 @@ class SequenceSunBurst extends React.Component {
       root.sum(function(d) { return d.size; });
 
       var nodes = partition(root).descendants()
+      // filtering filters out over half of nodes
 /*          .filter(function(d) {
           var dx = d.x1 - d.x0;
           return (dx > 0.005); // 0.005 radians = 0.29 degrees
           });*/
 
-      console.log('v4 nodes', nodes);
-
+      // Determines max depth when entering data to paths
+      var maxDepth = 0;
       var path = vis.data(nodes).selectAll("path")
           .data(nodes)
           .enter().append("svg:path")
           .attr("display", function(d) { return d.depth ? null : "none"; })
           .attr("d", arc)
           .attr("fill-rule", "evenodd")
-          .style("fill", function(d) { return colors[d.name]; })
+          .style("fill", function(d) { 
+            if (d.depth > maxDepth) {
+              maxDepth = d.depth;
+            }
+            return colors[d.name]; 
+          })
           .style("opacity", 1)
           .on("mouseover", mouseover);
+
+      // Bounding inner circle based on depth of elements
+      var innerG = vis.append("g");
+
+      var innerBound = innerG.append("circle")
+          .attr("r", radius / (maxDepth + 1))
+          .attr("id", "innerBound")
+          .text("hello")
+          .style("fill", "blue")
+          .style("opacity", 0);
+
+      var innerText = innerG.append("text")
+          .style("id", "percentage")
+          .text("%");
 
       // Add the mouseleave handler to the bounding circle.
       d3.select("#container").on("mouseleave", mouseleave);
 
       // Get total size of the tree = value of root node from partition.
-      console.log('path node line 93', path);
       totalSize = path.node().__data__.value;
      };
 
@@ -290,10 +320,6 @@ class SequenceSunBurst extends React.Component {
         <div id="main">
           <div id="sequence"></div>
           <div id="chart">
-            <div id="explanation" style={{visibility: "hidden"}}>
-              <span id="percentage"></span><br/>
-              of visits begin with this sequence of pages
-            </div>
           </div>
         </div>
         <div id="sidebar">
