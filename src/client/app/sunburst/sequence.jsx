@@ -63,6 +63,7 @@ class SequenceSunBurst extends React.Component {
         .endAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x1))); })
         .innerRadius(function(d) { return Math.max(0, y(d.y0)); })
         .outerRadius(function(d) { return Math.max(0, y(d.y1)); });
+
     // Use d3.text and d3.csv.parseRows so that we do not need to have a header
     // row, and can receive the csv as an array of arrays.
 /*    d3.text("visit-sequences.csv", function(text) {
@@ -160,16 +161,16 @@ class SequenceSunBurst extends React.Component {
 
       // Then highlight only those that are an ancestor of the current segment.
       vis.selectAll("path")
-          .filter(function(node) {
-                    return (sequenceArray.indexOf(node) >= 0);
-                  })
-          .style("opacity", 1);
+        .filter(function(node) {
+          return (sequenceArray.indexOf(node) >= 0);
+        })
+        .style("opacity", 1);
     }
 
     // Restore everything to full opacity when moving off the visualization.
     function mouseleave(d) {
       d3.select("#percentage").text("");
-      
+
       // Hide the breadcrumb trail
       d3.select("#trail")
           .style("visibility", "hidden");
@@ -234,21 +235,23 @@ class SequenceSunBurst extends React.Component {
       // Data join; key function combines name and depth (= position in sequence).
       var g = d3.select("#trail")
           .selectAll("g")
-          .data(nodeArray, function(d) { return d.name + d.depth; });
+          .data(nodeArray, function(d) { 
+            console.log('v4 d', d);
+            return d.data.name + d.depth; });
 
       // Add breadcrumb and label for entering nodes.
       var entering = g.enter().append("svg:g");
 
       entering.append("svg:polygon")
           .attr("points", breadcrumbPoints)
-          .style("fill", function(d) { return colors[d.name]; });
+          .style("fill", function(d) { return colors(d.data.name); });
 
       entering.append("svg:text")
           .attr("x", (b.w + b.t) / 2)
           .attr("y", b.h / 2)
           .attr("dy", "0.35em")
           .attr("text-anchor", "middle")
-          .text(function(d) { return d.name; });
+          .text(function(d) { return d.data.name; });
 
       // Set position for entering and updating nodes.
       g.attr("transform", function(d, i) {
