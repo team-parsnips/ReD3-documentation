@@ -36,14 +36,15 @@ class SequenceSunBurst extends React.Component {
     };
 
     // Mapping of step names to colors.
-    var colors = {
+    /*var colors = {
       "home": "#5687d1",
       "product": "#7b615c",
       "search": "#de783b",
       "account": "#6ab975",
       "other": "#a173d1",
       "end": "#bbbbbb"
-    };
+    };*/
+    var colors = d3.scaleOrdinal(d3.schemeCategory20);
 
     // Total size of all segments; we set this later, after loading the data.
     var totalSize = 0; 
@@ -87,7 +88,6 @@ class SequenceSunBurst extends React.Component {
           .style("opacity", 0);
 
       // For efficiency, filter nodes to keep only those large enough to see.
-
       var root = d3.hierarchy(window.flare);
       root.sum(function(d) { return d.size; });
 
@@ -110,7 +110,7 @@ class SequenceSunBurst extends React.Component {
             if (d.depth > maxDepth) {
               maxDepth = d.depth;
             }
-            return colors[d.name]; 
+            return colors((d.children ? d : d.parent).data.name); 
           })
           .style("opacity", 1)
           .on("mouseover", mouseover);
@@ -168,7 +168,8 @@ class SequenceSunBurst extends React.Component {
 
     // Restore everything to full opacity when moving off the visualization.
     function mouseleave(d) {
-
+      d3.select("#percentage").text("");
+      
       // Hide the breadcrumb trail
       d3.select("#trail")
           .style("visibility", "hidden");
@@ -181,9 +182,9 @@ class SequenceSunBurst extends React.Component {
           .transition()
           .duration(1000)
           .style("opacity", 1)
-          .each("end", function() {
-                  d3.select(this).on("mouseover", mouseover);
-                });
+          .on("end", function() {
+            d3.select(this).on("mouseover", mouseover);
+          });
 
       d3.select("#explanation")
           .style("visibility", "hidden");
