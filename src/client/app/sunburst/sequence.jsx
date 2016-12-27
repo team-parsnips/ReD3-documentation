@@ -121,13 +121,13 @@ class SequenceSunBurst extends React.Component {
       var innerBound = innerG.append("circle")
           .attr("r", radius / (maxDepth + 1))
           .attr("id", "innerBound")
-          .text("hello")
-          .style("fill", "blue")
           .style("opacity", 0);
 
       var innerText = innerG.append("text")
-          .style("id", "percentage")
-          .text("%");
+          .attr("id", "percentage")
+          .attr("x", -20)
+          .attr("y", 0)
+          .text("");
 
       // Add the mouseleave handler to the bounding circle.
       d3.select("#container").on("mouseleave", mouseleave);
