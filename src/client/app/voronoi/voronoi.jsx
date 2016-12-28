@@ -37,35 +37,32 @@ class Voronoi extends React.Component {
   }
 
   componentDidMount() {
-    const linksStyle = {
-      'stroke': '#000',
-      'stroke-opacity': '0.2'
-    }
+    var svg, voronoi, polygon, link, site;
 
-    const polygonsStyle = {
-      'fill': 'none',
-      'stroke': '#000'
-    }
-
-    const sitesStyle = {
-      'fill': '#000',
-      'stroke': '#fff'
-    }
-
-    let svg     = d3.select('.voronoi');
-    let voronoi = d3.voronoi().extent([[-1, -1], [960 + 1, 500 + 1]]);
-    let polygon = svg.append('g').attr('className', 'polygon')
-                  .selectAll('path').data(voronoi.polygons(this.state.dataSet))
-                  .enter().append('path').attr('fill', 'none').attr('stroke', '#000')
-                  .call(this.redrawPolygon);
-    let link    = svg.append('g').attr('className', 'links')
-                  .select('line').data(voronoi.links(this.state.dataSet))
-                  .enter().append('line').attr('stroke', '#000').attr('stroke-opacity', '1') 
-                  .call(this.redrawLink);
-    let site    = svg.append('g').attr('className', 'sites')
-                  .selectAll('circle').data(this.state.dataSet)
-                  .enter().append('circle').attr('r', 2.5).attr('fill', '#000').attr('stroke', '#fff')
-                  .call(this.redrawSite);
+    svg     = d3.select('.voronoi');
+    voronoi = d3.voronoi().extent([[-1, -1], [960 + 1, 500 + 1]]);
+    polygon = svg.append('g')
+                .attr('class', 'polygon')
+              .selectAll('path').data(voronoi.polygons(this.state.dataSet))
+              .enter().append('path')
+                .attr('fill', 'none')
+                .attr('stroke', '#000')
+              .call(this.redrawPolygon);
+    link    = svg.append('g')
+                .attr('class', 'links')
+              .selectAll('line').data(voronoi.links(this.state.dataSet))
+              .enter().append('line')
+                .attr('stroke', '#000')
+                .attr('stroke-opacity', '0.2') 
+              .call(this.redrawLink);
+    site    = svg.append('g')
+                .attr('class', 'sites')
+              .selectAll('circle').data(this.state.dataSet)
+              .enter().append('circle')
+                .attr('r', 2.5)
+                .attr('fill', '#000')
+                .attr('stroke', '#fff')
+              .call(this.redrawSite);
     
     this.setState({
       voronoi: voronoi,
@@ -82,12 +79,14 @@ class Voronoi extends React.Component {
     temp[0] = [e.clientX, e.clientY];
     this.setState({dataSet: temp});
     this.redraw();
+    d3.select('.voronoi').select('.polygon').select('path').attr('fill', '#f00');
+    d3.select('.voronoi').select('.sites').select('circle').attr('fill', '#fff');
+
   }
 
   redraw() {
     let diagram = this.state.voronoi(this.state.dataSet);
     this.setState({polygon: this.state.polygon.data(diagram.polygons()).call(this.redrawPolygon)});
-    // console.log(diagram.links());
     this.setState({link: this.state.link.data(diagram.links())});
     this.setState({link: this.state.link.exit().remove()});
     this.setState({link: this.state.link.enter().append('line').merge(this.state.link).call(this.redrawLink)});
