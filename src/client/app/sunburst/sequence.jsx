@@ -16,6 +16,10 @@ const explanationStyle = {
 class SequenceSunBurst extends React.Component {
   constructor() {
     super();
+    this.state = {
+      crumbs: [],
+      percentString: '',
+    }
   }
 
   componentDidMount() {
@@ -45,6 +49,7 @@ class SequenceSunBurst extends React.Component {
       "end": "#bbbbbb"
     };*/
     var colors = d3.scaleOrdinal(d3.schemeCategory20);
+    this.colors = colors;
 
     // Total size of all segments; we set this later, after loading the data.
     var totalSize = 0; 
@@ -170,7 +175,6 @@ class SequenceSunBurst extends React.Component {
     // Restore everything to full opacity when moving off the visualization.
     function mouseleave(d) {
       d3.select("#percentage").text("");
-
       // Hide the breadcrumb trail
       d3.select("#trail")
           .style("visibility", "hidden");
@@ -229,18 +233,22 @@ class SequenceSunBurst extends React.Component {
       return points.join(" ");
     }
 
+    var context = this;
     // Update the breadcrumb trail to show the current sequence and percentage.
     function updateBreadcrumbs(nodeArray, percentageString) {
 
+      console.log('bread nodearr', nodeArray);
+      context.setState({crumbs: nodeArray});
+      context.setState({percentString: percentageString});
       // Data join; key function combines name and depth (= position in sequence).
-      var g = d3.select("#trail")
+/*      var g = d3.select("#trail")
           .selectAll("g")
           .data(nodeArray, function(d) { 
-            console.log('v4 d', d);
             return d.data.name + d.depth; });
 
       // Add breadcrumb and label for entering nodes.
-      var entering = g.enter().append("svg:g");
+      var entering = g.enter().append("g")
+        .attr("id", "breadcrumbG");
 
       entering.append("svg:polygon")
           .attr("points", breadcrumbPoints)
@@ -272,7 +280,7 @@ class SequenceSunBurst extends React.Component {
       // Make the breadcrumb trail visible, if it's hidden.
       d3.select("#trail")
           .style("visibility", "");
-
+*/
     }
 
     function drawLegend() {
@@ -321,6 +329,8 @@ class SequenceSunBurst extends React.Component {
   render() {
     return(
       <div>
+        {this.state.crumbs.map((crumb) => <div style={{color: this.colors(crumb.data.name), display: 'inline-block' }}>{crumb.data.name}</div>)}
+        {this.state.percentString}
         <div id="main">
           <div id="sequence"></div>
           <div id="chart">
