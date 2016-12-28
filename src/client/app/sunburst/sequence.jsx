@@ -174,7 +174,7 @@ class SequenceSunBurst extends React.Component {
 
     // Restore everything to full opacity when moving off the visualization.
     function mouseleave(d) {
-      d3.select("#percentage").text("");
+
       // Hide the breadcrumb trail
       d3.select("#trail")
           .style("visibility", "hidden");
@@ -189,6 +189,9 @@ class SequenceSunBurst extends React.Component {
           .style("opacity", 1)
           .on("end", function() {
             d3.select(this).on("mouseover", mouseover);
+            context.setState({crumbs: []});
+            context.setState({percentString: ''});
+            d3.select("#percentage").text("");
           });
 
       d3.select("#explanation")
