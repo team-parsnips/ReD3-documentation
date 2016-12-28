@@ -59,8 +59,8 @@ class Voronoi extends React.Component {
                   .enter().append('path').attr('fill', 'none').attr('stroke', '#000')
                   .call(this.redrawPolygon);
     let link    = svg.append('g').attr('className', 'links')
-                  .select('line').data(voronoi.links(this.state.dataSet))
-                  .enter().append('line').attr('stroke', '#000').attr('stroke-opacity', '1') 
+                  .selectAll('line').data(voronoi.links(this.state.dataSet))
+                  .enter().append('line').attr('stroke', '#000').attr('stroke-opacity', '0.3') 
                   .call(this.redrawLink);
     let site    = svg.append('g').attr('className', 'sites')
                   .selectAll('circle').data(this.state.dataSet)
