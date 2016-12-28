@@ -87,7 +87,6 @@ class Voronoi extends React.Component {
   redraw() {
     let diagram = this.state.voronoi(this.state.dataSet);
     this.setState({polygon: this.state.polygon.data(diagram.polygons()).call(this.redrawPolygon)});
-    // console.log(diagram.links());
     this.setState({link: this.state.link.data(diagram.links())});
     this.setState({link: this.state.link.exit().remove()});
     this.setState({link: this.state.link.enter().append('line').merge(this.state.link).call(this.redrawLink)});

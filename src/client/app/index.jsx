@@ -11,6 +11,9 @@ class App extends React.Component {
   render () {
     return (    
       <div>
+        <Voronoi />
+        <SunBurst />
+        <DndTree />
         <ZoomableMap />
       </div>
     );
@@ -18,6 +21,3 @@ class App extends React.Component {
 }
 
 render(<App/>, document.getElementById('app'));
-      // <Voronoi />
-      // <SunBurst />
-      // <DndTree />
