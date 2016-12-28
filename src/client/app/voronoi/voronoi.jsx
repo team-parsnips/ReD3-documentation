@@ -37,6 +37,7 @@ class Voronoi extends React.Component {
   }
 
   componentDidMount() {
+<<<<<<< HEAD
     var svg, voronoi, polygon, link, site;
 
 
@@ -65,6 +66,37 @@ class Voronoi extends React.Component {
                 .attr('fill', '#000')
                 .attr('stroke', '#fff')
               .call(this.redrawSite);
+=======
+    const linksStyle = {
+      'stroke': '#000',
+      'stroke-opacity': '0.2'
+    }
+
+    const polygonsStyle = {
+      'fill': 'none',
+      'stroke': '#000'
+    }
+
+    const sitesStyle = {
+      'fill': '#000',
+      'stroke': '#fff'
+    }
+
+    let svg     = d3.select('.voronoi');
+    let voronoi = d3.voronoi().extent([[-1, -1], [960 + 1, 500 + 1]]);
+    let polygon = svg.append('g').attr('className', 'polygon')
+                  .selectAll('path').data(voronoi.polygons(this.state.dataSet))
+                  .enter().append('path').attr('fill', 'none').attr('stroke', '#000')
+                  .call(this.redrawPolygon);
+    let link    = svg.append('g').attr('className', 'links')
+                  .selectAll('line').data(voronoi.links(this.state.dataSet))
+                  .enter().append('line').attr('stroke', '#000').attr('stroke-opacity', '0.3') 
+                  .call(this.redrawLink);
+    let site    = svg.append('g').attr('className', 'sites')
+                  .selectAll('circle').data(this.state.dataSet)
+                  .enter().append('circle').attr('r', 2.5).attr('fill', '#000').attr('stroke', '#fff')
+                  .call(this.redrawSite);
+>>>>>>> 09e63b646de0985f07d646969d570f56c43b49c2
     
     this.setState({
       voronoi: voronoi,
