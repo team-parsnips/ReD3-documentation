@@ -16,10 +16,6 @@ const explanationStyle = {
 class SequenceSunBurst extends React.Component {
   constructor() {
     super();
-    this.state = {
-      crumbs: [],
-      percentString: '',
-    }
   }
 
   componentDidMount() {
@@ -189,8 +185,6 @@ class SequenceSunBurst extends React.Component {
           .style("opacity", 1)
           .on("end", function() {
             d3.select(this).on("mouseover", mouseover);
-            context.setState({crumbs: []});
-            context.setState({percentString: ''});
             d3.select("#percentage").text("");
           });
 
@@ -239,23 +233,18 @@ class SequenceSunBurst extends React.Component {
     var context = this;
     // Update the breadcrumb trail to show the current sequence and percentage.
     function updateBreadcrumbs(nodeArray, percentageString) {
-
-      console.log('bread nodearr', nodeArray);
-      context.setState({crumbs: nodeArray});
-      context.setState({percentString: percentageString});
       // Data join; key function combines name and depth (= position in sequence).
-/*      var g = d3.select("#trail")
+      var g = d3.select("#trail")
           .selectAll("g")
           .data(nodeArray, function(d) { 
             return d.data.name + d.depth; });
 
       // Add breadcrumb and label for entering nodes.
-      var entering = g.enter().append("g")
-        .attr("id", "breadcrumbG");
+      var entering = g.enter().append("g");
 
       entering.append("svg:polygon")
           .attr("points", breadcrumbPoints)
-          .style("fill", function(d) { return colors(d.data.name); });
+          .style("fill", function(d) { return colors((d.children ? d : d.parent).data.name); });
 
       entering.append("svg:text")
           .attr("x", (b.w + b.t) / 2)
@@ -265,9 +254,10 @@ class SequenceSunBurst extends React.Component {
           .text(function(d) { return d.data.name; });
 
       // Set position for entering and updating nodes.
-      g.attr("transform", function(d, i) {
-        return "translate(" + i * (b.w + b.s) + ", 0)";
-      });
+      d3.select("#trail")
+          .selectAll("g").attr("transform", function(d, i) {
+            return "translate(" + (d.depth - 1) * (b.w + b.s) + ", 0)";
+          });
 
       // Remove exiting nodes.
       g.exit().remove();
@@ -283,7 +273,7 @@ class SequenceSunBurst extends React.Component {
       // Make the breadcrumb trail visible, if it's hidden.
       d3.select("#trail")
           .style("visibility", "");
-*/
+
     }
 
     function drawLegend() {
@@ -332,8 +322,6 @@ class SequenceSunBurst extends React.Component {
   render() {
     return(
       <div>
-        {this.state.crumbs.map((crumb) => <div style={{color: this.colors(crumb.data.name), display: 'inline-block' }}>{crumb.data.name}</div>)}
-        {this.state.percentString}
         <div id="main">
           <div id="sequence"></div>
           <div id="chart">
