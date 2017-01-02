@@ -6,6 +6,7 @@ import {deepOrange500} from 'material-ui/styles/colors';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
+import ArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 
 const styles = {
   container: { textAlign: 'center', paddingTop: 200
@@ -41,12 +42,24 @@ class Navigation extends Component {
             onLeftIconButtonTouchTap={this.handleDrawerToggle}/>
           <Drawer
             docked={false}
-            open={this.state.open}>
+            open={this.state.open}
+            onRequestChange={this.handleClose}>
             <Link to="/" style={linkStyle}>
               <MenuItem>Get Started</MenuItem>
             </Link>
+            <MenuItem 
+              primaryText="Components"
+              rightIcon={<ArrowDropDown />} 
+              menuItems={[
+                <MenuItem primaryText="Voronoi" />,
+                <MenuItem primaryText="SunBurst" />,
+                <MenuItem primaryText="Zoomable Map" />,
+                <MenuItem primaryText="Hierarchical" />,
+                <MenuItem primaryText="Dnd Tree" />,
+              ]}/>
+            <hr />
             <Link to="/" style={linkStyle}>
-              <MenuItem>Components</MenuItem>
+              <MenuItem>GitHub</MenuItem>
             </Link>
           </Drawer>
         </div>

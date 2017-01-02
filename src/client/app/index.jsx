@@ -13,8 +13,6 @@ import DndTree from './dnd-tree/dndTree.jsx';
 import ZoomableMap from './zoomableMap/zoomableMap.jsx';
 import HierarchialEdgeBundle from './hierarchical/hierarchical.jsx';
 
-injectTapEventPlugin();
-
 class App extends React.Component {
   render () {
     return (    
@@ -27,4 +25,5 @@ class App extends React.Component {
   }
 }
 
+injectTapEventPlugin();
 render(<App/>, document.getElementById('app'));
