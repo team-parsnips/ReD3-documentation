@@ -13,7 +13,9 @@ class StackedGroupedBar extends React.Component {
     super(props);
     this.state = {
       width: this.props.width || 960,
-      height: this.props.height ||500,
+      innerWidth: (this.props.width || 960) - margin.left - margin.right,
+      height: this.props.height || 500,
+      innerHeight: (this.props.height ||500) - margin.top - margin.bottom,
       dataSet: {}
 
     }
@@ -23,6 +25,7 @@ class StackedGroupedBar extends React.Component {
   }
 
   sampleData() {
+    console.log(margin.top);
     let m = 58, n = 4, xz, yz, y01z, yMax, y1Max, dataSet;
     xz = d3.range(m);
     yz = d3.range(n).map(()=> this.bumps(m));
@@ -52,19 +55,20 @@ class StackedGroupedBar extends React.Component {
 
     svg = d3.select('.stackedgrouped');
     g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-    x = d3.scaleBand().domain(data.xz).rangeRound([0, this.state.width]).padding(0.08);
-    y = d3.scaleLinear().domain([0, data.y1Max]).range([this.state.height, 0]);
+    x = d3.scaleBand().domain(data.xz).rangeRound([0, this.state.innerWidth]).padding(0.08);
+    y = d3.scaleLinear().domain([0, data.y1Max]).range([this.state.innerHeight, 0]);
     color = d3.scaleOrdinal().domain(d3.range(data.n)).range(d3.schemeCategory20c);
     series = g.selectAll('.series').data(data.y01z).enter().append('g').attr('fill', (d, i) => color(i));
     rect = series.selectAll('rect').data(d => d).enter().append('rect')
-    .attr('x', (d, i) => x(i)).attr('y', this.state.height).attr('width', x.bandwidth()).attr('height', 0);
+    .attr('x', (d, i) => x(i)).attr('y', this.state.innerHeight).attr('width', x.bandwidth()).attr('height', 0);
 
     rect.transition().delay((d, i) => i * 10)
     .attr('y', d => y(d[1]))
     .attr('height', d => y(d[0]) - y(d[1]));
 
-    g.append('g').attr('class', 'axis axis--x').attr('transform', 'translate(0,' + this.state.height + ')')
-    .call(d3.axisBottom(x).tickSize(0).tickPadding(6));
+    g.append('g').attr('class', 'axis axis--x')
+    .attr('transform', 'translate(0,' + this.state.innerHeight + ')')
+    .call(d3.axisBottom(x).tickSize(1).tickPadding(6));
 
     d3.selectAll('input').on('change', changed);
 
@@ -88,11 +92,11 @@ class StackedGroupedBar extends React.Component {
       rect.transition()
           .duration(500)
           .delay(function(d, i) { return i * 10; })
-          .attr("x", function(d, i) { return x(i) + x.bandwidth() / data.n * this.parentNode.__data__.key; })
-          .attr("width", x.bandwidth() / data.n)
+          .attr('x', function(d, i) { return x(i) + x.bandwidth() / data.n * this.parentNode.__data__.key; })
+          .attr('width', x.bandwidth() / data.n)
         .transition()
-          .attr("y", function(d) { return y(d[1] - d[0]); })
-          .attr("height", function(d) { return y(0) - y(d[1] - d[0]); });
+          .attr('y', function(d) { return y(d[1] - d[0]); })
+          .attr('height', function(d) { return y(0) - y(d[1] - d[0]); });
     }
 
     function transitionStacked() {
@@ -101,11 +105,11 @@ class StackedGroupedBar extends React.Component {
       rect.transition()
           .duration(500)
           .delay(function(d, i) { return i * 10; })
-          .attr("y", function(d) { return y(d[1]); })
-          .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+          .attr('y', function(d) { return y(d[1]); })
+          .attr('height', function(d) { return y(d[0]) - y(d[1]); })
         .transition()
-          .attr("x", function(d, i) { return x(i); })
-          .attr("width", x.bandwidth());
+          .attr('x', function(d, i) { return x(i); })
+          .attr('width', x.bandwidth());
     }
 
   }
