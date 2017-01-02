@@ -10,6 +10,10 @@ app.get('/usamap', function (req, res) {
   res.sendFile('usamap.json', {root: __dirname});
 });
 
+app.get('/flare', function (req, res) {
+  res.sendFile('flare.json', {root: __dirname});
+});
+
 app.get('/', function (req, res) {
   res.sendFile('index.html', {root: path.join(__dirname, '../client')});
 });

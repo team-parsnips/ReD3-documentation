@@ -7,6 +7,7 @@ import SunBurst from './sunburst/sunburst.jsx';
 import SequenceSunBurst from './sunburst/sequence.jsx';
 import DndTree from './dnd-tree/dndTree.jsx';
 import ZoomableMap from './zoomableMap/zoomableMap.jsx';
+import CirclePacking from './circlePacking/circlePacking.jsx';
 
 class App extends React.Component {
   render () {
@@ -17,6 +18,7 @@ class App extends React.Component {
         <SequenceSunBurst />
         <DndTree />
         <ZoomableMap />
+        <CirclePacking />
       </div>
     );
   }
