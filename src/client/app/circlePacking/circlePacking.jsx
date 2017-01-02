@@ -56,8 +56,9 @@ class CirclePacking extends React.Component {
           .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
           .text(function(d) { return d.data.name; });
 
-      var node = g.selectAll("circle,text")
-        .style('cursor', 'pointer')
+      var node = g.selectAll("circle,text");
+
+      node.style('cursor', 'pointer')
         .on('mouseover', function(d) {
           var nodeSelection = d3.select(this)
             .style('stroke', '#000')
@@ -76,20 +77,25 @@ class CirclePacking extends React.Component {
       zoomTo([root.x, root.y, root.r * 2 + margin]);
 
       function zoom(d) {
-        var focus0 = focus; focus = d;
+        var focus0 = focus;
+        focus = d;
 
         var transition = d3.transition()
-            .duration(d3.event.altKey ? 7500 : 750)
-            .tween("zoom", function(d) {
-              var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
-              return function(t) { zoomTo(i(t)); };
-            });
+          .duration(d3.event.altKey ? 7500 : 750)
+          .tween("zoom", function(d) {
+            var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
+            return function(t) { zoomTo(i(t)); };
+          });
 
-        transition.selectAll("text")
-          .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
-            .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
-            .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
-            .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
+        // var text = transition.selectAll("text");
+        // console.log('selected text', text);
+        // text.filter((d) => {
+        //   console.log('parent', d.parent);
+        // });
+        // text.filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
+        //   .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
+        //   .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
+        //   .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
       }
 
       function zoomTo(v) {
