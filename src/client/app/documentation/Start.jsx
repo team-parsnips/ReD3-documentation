@@ -7,7 +7,7 @@ class Start extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h2>Get Started</h2>
       </div>
     )

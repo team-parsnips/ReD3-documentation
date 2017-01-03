@@ -44,6 +44,10 @@ class Navigation extends Component {
             docked={false}
             open={this.state.open}
             onRequestChange={this.handleClose}>
+            <Link to="/" style={linkStyle}>
+              <MenuItem>ReD3</MenuItem>
+            </Link>
+            <Divider />
             <Link to="/start" style={linkStyle}>
               <MenuItem>Get Started</MenuItem>
             </Link>

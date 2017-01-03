@@ -8,7 +8,7 @@ class DndTreeDoc extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h2>Drag 'n Drop Tree</h2>
         <DndTree />
       </div>

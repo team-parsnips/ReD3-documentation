@@ -8,7 +8,7 @@ class HierarchicalDoc extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h2>Hierarchical Edge Bundle</h2>
         <HierarchicalEdgeBundle />
       </div>
