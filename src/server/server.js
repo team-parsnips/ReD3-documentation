@@ -14,6 +14,10 @@ app.get('/flare', function (req, res) {
   res.sendFile('flare.json', {root: __dirname});
 });
 
+app.get('/tsvData', function (req, res) {
+  res.sendFile('data.tsv', {root: __dirname});
+});
+
 app.get('/', function (req, res) {
   res.sendFile('index.html', {root: path.join(__dirname, '../client')});
 });

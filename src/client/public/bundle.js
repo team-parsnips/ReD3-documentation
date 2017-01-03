@@ -81,6 +81,10 @@
 	
 	var _circlePacking2 = _interopRequireDefault(_circlePacking);
 	
+	var _scatterPlot = __webpack_require__(/*! ./scatterPlot/scatterPlot.jsx */ 189);
+	
+	var _scatterPlot2 = _interopRequireDefault(_scatterPlot);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -88,8 +92,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
 	// import ReactD3 from './ReactD3/ReactD3.jsx';
+	
 	
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
@@ -111,7 +115,8 @@
 	        _react2.default.createElement(_sequence2.default, null),
 	        _react2.default.createElement(_dndTree2.default, null),
 	        _react2.default.createElement(_zoomableMap2.default, null),
-	        _react2.default.createElement(_circlePacking2.default, null)
+	        _react2.default.createElement(_circlePacking2.default, null),
+	        _react2.default.createElement(_scatterPlot2.default, null)
 	      );
 	    }
 	  }]);
@@ -41461,6 +41466,135 @@
 	}(_react2.default.Component);
 	
 	exports.default = CirclePacking;
+
+/***/ },
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */
+/*!****************************************************!*\
+  !*** ./src/client/app/scatterPlot/scatterPlot.jsx ***!
+  \****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _d = __webpack_require__(/*! d3 */ 179);
+	
+	var d3 = _interopRequireWildcard(_d);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ScatterPlot = function (_React$Component) {
+	  _inherits(ScatterPlot, _React$Component);
+	
+	  function ScatterPlot(props) {
+	    _classCallCheck(this, ScatterPlot);
+	
+	    var _this = _possibleConstructorReturn(this, (ScatterPlot.__proto__ || Object.getPrototypeOf(ScatterPlot)).call(this, props));
+	
+	    _this.state = {
+	      width: 960,
+	      height: 960,
+	      options: {
+	        // styles here!
+	      }
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(ScatterPlot, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var margin = { top: 20, right: 20, bottom: 30, left: 40 },
+	          width = 960 - margin.left - margin.right,
+	          height = 500 - margin.top - margin.bottom;
+	
+	      var x = d3.scaleLinear().range([0, width]);
+	
+	      var y = d3.scaleLinear().range([height, 0]);
+	
+	      var color = d3.scaleOrdinal(d3.schemeCategory10);
+	
+	      var valueline = d3.line().x(function (d) {
+	        return x(d.close);
+	      }).y(function (d) {
+	        return y(d.close);
+	      });
+	
+	      var svg = d3.select(".scatter-plot").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	
+	      d3.tsv("/tsvData", function (error, data) {
+	        if (error) throw error;
+	
+	        // console.log ('data', data);
+	
+	        data.forEach(function (d) {
+	          var datum = d["sepalLength sepalWidth petalLength petalWidth species"].split(' ');
+	          d.sepalLength = +datum[0];
+	          d.sepalWidth = +datum[1];
+	          d.species = datum[4];
+	        });
+	
+	        x.domain(d3.extent(data, function (d) {
+	          d.sepalWidth;
+	        }));
+	        y.domain(d3.extent(data, function (d) {
+	          d.sepalLength;
+	        }));
+	
+	        svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(valueline.x).append("text").attr("class", "label").attr("x", width).attr("y", -6).style("text-anchor", "end").text("Sepal Width (cm)");
+	
+	        svg.append("g").attr("class", "y axis").call(valueline.y).append("text").attr("class", "label").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").text("Sepal Length (cm)");
+	
+	        svg.selectAll(".dot").data(data).enter().append("circle").attr("class", "dot").attr("r", 3.5).attr("cx", function (d) {
+	          x(d.sepalWidth);
+	        }).attr("cy", function (d) {
+	          y(d.sepalLength);
+	        }).style("fill", function (d) {
+	          color(d.species);
+	        });
+	
+	        var legend = svg.selectAll(".legend").data(color.domain()).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
+	          return "translate(0," + i * 20 + ")";
+	        });
+	
+	        legend.append("rect").attr("x", width - 18).attr("width", 18).attr("height", 18).style("fill", color);
+	
+	        legend.append("text").attr("x", width - 24).attr("y", 9).attr("dy", ".35em").style("text-anchor", "end").text(function (d) {
+	          return d;
+	        });
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement('div', { className: 'scatter-plot' });
+	    }
+	  }]);
+	
+	  return ScatterPlot;
+	}(_react2.default.Component);
+	
+	exports.default = ScatterPlot;
 
 /***/ }
 /******/ ]);

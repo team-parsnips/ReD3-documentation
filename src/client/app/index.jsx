@@ -9,6 +9,7 @@ import DndTree from './dnd-tree/dndTree.jsx';
 import ZoomableMap from './zoomableMap/zoomableMap.jsx';
 import CirclePacking from './circlePacking/circlePacking.jsx';
 // import ReactD3 from './ReactD3/ReactD3.jsx';
+import ScatterPlot from './scatterPlot/scatterPlot.jsx';
 
 class App extends React.Component {
   render () {
@@ -20,6 +21,7 @@ class App extends React.Component {
         <DndTree />
         <ZoomableMap />
         <CirclePacking />
+        <ScatterPlot />
       </div>
     );
   }
