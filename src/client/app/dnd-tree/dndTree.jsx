@@ -16,9 +16,7 @@ class DndTree extends React.Component {
 
   componentDidMount() {
     var svg = d3.select(".dndTree");
-    console.log('svg', svg);
     var g = svg.append("g").attr("transform", "translate(40,0)");
-    console.log('g', g);
 
     var height = this.state.height;
     var width = this.state.width;

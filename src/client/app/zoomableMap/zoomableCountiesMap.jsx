@@ -2,7 +2,7 @@ import React from 'react';
 import * as d3 from 'd3';
 import * as topojson from "topojson";
 
-class ZoomableMap extends React.Component {
+class ZoomableCountiesMap extends React.Component {
 
   constructor(props) {
     super(props);
@@ -10,6 +10,9 @@ class ZoomableMap extends React.Component {
       width: 960,
       height: 500,
       centered: null,
+      path: null,
+      projection: null,
+      us: null,
       options: {
         // 'polyFill': this.props.polyFill || 'none',
 
@@ -34,7 +37,7 @@ class ZoomableMap extends React.Component {
                     .attr('fill', 'none')
                     .attr('pointer-events', 'all')
                   .on('click', this.click);
-    g = svg.append('g').attr('id', 'temp');
+    g = svg.append('g').attr('id', 'whole-map');
 
     
 
@@ -42,17 +45,19 @@ class ZoomableMap extends React.Component {
       if (err) {
         throw err;
       }
+      this.setState({us: us});
       g.append('g')
-        .attr('id', 'states')
+        .attr('class', 'states')
         .attr('fill', '#aaa')
       .selectAll('path').data(topojson.feature(us, us.objects.states).features)
       .enter().append('path')
         .attr('d', path)
+        // .attr('id', (d, i) => 'index' + i)
       .on('click', this.click);
 
       g.append('path')
         .datum(topojson.mesh(us, us.objects.states, (a, b) => {return (a !== b ); }))
-          .attr('id', 'state-borders')
+          .attr('class', 'state-borders')
           .attr('d', path)
           .attr('fill', 'none')
           .attr('stroke', '#fff')
@@ -72,34 +77,50 @@ class ZoomableMap extends React.Component {
 
   }
 
-  click(d) {
-    var x, y, k;
+  click(d, i) {
+    var x, y, k, path = this.state.path, us = this.state.us;
 
     if (d && this.state.centered !== d) {
       this.setState({ centered: d });
       let centroid = this.state.path.centroid(d);
+      drawCounties();
       x = centroid[0];
       y = centroid[1];
-      k = 4;
+      if (i === 4 || i === 43) {
+        k = 2.5;
+      } else {
+        k = 4;
+      }
     } else {
       this.setState({ centered: null });
       x = this.state.width/ 2;
       y = this.state.height / 2;
       k = 1;
-      d3.select('#temp').selectAll('path')
+      d3.selectAll('.county-borders').remove();
+      d3.select('#whole-map').selectAll('path')
         .classed('active', false);
     }
 
     this.state.g.selectAll('path')
       .classed('active', (this.state.centered) && (x => { return (x === this.state.centered); }));
 
-    d3.selectAll('#states path').attr('fill', '#aaa');
+    d3.selectAll('.states path').attr('fill', '#aaa');
     d3.select('.active').attr('fill', 'orange');
 
-    d3.select('#temp').transition().duration(750)
+
+    d3.select('#whole-map').transition().duration(750)
       .attr('transform', 'translate(' + this.state.width / 2 + ',' + this.state.height / 2 + ')scale(' + k + ')translate(' + -x + ',' + -y + ')')
       .style('stroke-width', 1.5 / k + 'px');
 
+    function drawCounties() {
+      d3.select('#whole-map').append('path')
+          .datum(topojson.mesh(us, us.objects.counties, (a, b) => {return (a !== b ); }))
+            .attr('class', 'county-borders')
+            .attr('d', path)
+            .attr('fill', 'none')
+            .attr('stroke', '#fff')
+            .attr('stroke-width', '0.5px');    
+    }
   }
 
   render() {
@@ -117,4 +138,4 @@ class ZoomableMap extends React.Component {
 
 }
 
-export default ZoomableMap;
+export default ZoomableCountiesMap;
