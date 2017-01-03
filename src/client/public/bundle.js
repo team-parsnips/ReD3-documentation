@@ -57,33 +57,43 @@
 	
 	var _reactDom = __webpack_require__(/*! react-dom */ 32);
 	
-	var _voronoi = __webpack_require__(/*! ./voronoi/voronoi.jsx */ 178);
+	var _reactRouter = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
-	var _voronoi2 = _interopRequireDefault(_voronoi);
+	var _reactTapEventPlugin = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-tap-event-plugin\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
-	var _sunburst = __webpack_require__(/*! ./sunburst/sunburst.jsx */ 180);
+	var _reactTapEventPlugin2 = _interopRequireDefault(_reactTapEventPlugin);
 	
-	var _sunburst2 = _interopRequireDefault(_sunburst);
+	var _Main = __webpack_require__(/*! ./documentation/Main.jsx */ 190);
 	
-	var _sequence = __webpack_require__(/*! ./sunburst/sequence.jsx */ 181);
+	var _Main2 = _interopRequireDefault(_Main);
 	
-	var _sequence2 = _interopRequireDefault(_sequence);
+	var _Navigation = __webpack_require__(/*! ./documentation/Navigation.jsx */ 191);
 	
-	var _dndTree = __webpack_require__(/*! ./dnd-tree/dndTree.jsx */ 182);
+	var _Navigation2 = _interopRequireDefault(_Navigation);
 	
-	var _dndTree2 = _interopRequireDefault(_dndTree);
+	var _Start = __webpack_require__(/*! ./documentation/Start.jsx */ 192);
 	
-	var _zoomableMap = __webpack_require__(/*! ./zoomableMap/zoomableMap.jsx */ 183);
+	var _Start2 = _interopRequireDefault(_Start);
 	
-	var _zoomableMap2 = _interopRequireDefault(_zoomableMap);
+	var _VoronoiDoc = __webpack_require__(/*! ./documentation/VoronoiDoc.jsx */ 193);
 	
-	var _circlePacking = __webpack_require__(/*! ./circlePacking/circlePacking.jsx */ 185);
+	var _VoronoiDoc2 = _interopRequireDefault(_VoronoiDoc);
 	
-	var _circlePacking2 = _interopRequireDefault(_circlePacking);
+	var _SunburstDoc = __webpack_require__(/*! ./documentation/SunburstDoc.jsx */ 194);
 	
-	var _scatterPlot = __webpack_require__(/*! ./scatterPlot/scatterPlot.jsx */ 189);
+	var _SunburstDoc2 = _interopRequireDefault(_SunburstDoc);
 	
-	var _scatterPlot2 = _interopRequireDefault(_scatterPlot);
+	var _ZoomMapDoc = __webpack_require__(/*! ./documentation/ZoomMapDoc.jsx */ 195);
+	
+	var _ZoomMapDoc2 = _interopRequireDefault(_ZoomMapDoc);
+	
+	var _HierarchicalDoc = __webpack_require__(/*! ./documentation/HierarchicalDoc.jsx */ 197);
+	
+	var _HierarchicalDoc2 = _interopRequireDefault(_HierarchicalDoc);
+	
+	var _DndTreeDoc = __webpack_require__(/*! ./documentation/DndTreeDoc.jsx */ 199);
+	
+	var _DndTreeDoc2 = _interopRequireDefault(_DndTreeDoc);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -92,8 +102,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	// import ReactD3 from './ReactD3/ReactD3.jsx';
-	
 	
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
@@ -108,15 +116,19 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(_voronoi2.default, null),
-	        _react2.default.createElement(_sunburst2.default, null),
-	        _react2.default.createElement(_sequence2.default, null),
-	        _react2.default.createElement(_dndTree2.default, null),
-	        _react2.default.createElement(_zoomableMap2.default, null),
-	        _react2.default.createElement(_circlePacking2.default, null),
-	        _react2.default.createElement(_scatterPlot2.default, null)
+	        _reactRouter.Router,
+	        { history: _reactRouter.browserHistory },
+	        _react2.default.createElement(
+	          _reactRouter.Route,
+	          { component: _Navigation2.default },
+	          _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Main2.default }),
+	          _react2.default.createElement(_reactRouter.Route, { path: '/start', component: _Start2.default }),
+	          _react2.default.createElement(_reactRouter.Route, { path: '/voronoi', component: _VoronoiDoc2.default }),
+	          _react2.default.createElement(_reactRouter.Route, { path: '/sunburst', component: _SunburstDoc2.default }),
+	          _react2.default.createElement(_reactRouter.Route, { path: '/zoommap', component: _ZoomMapDoc2.default }),
+	          _react2.default.createElement(_reactRouter.Route, { path: '/hierarchical', component: _HierarchicalDoc2.default }),
+	          _react2.default.createElement(_reactRouter.Route, { path: '/dndtree', component: _DndTreeDoc2.default })
+	        )
 	      );
 	    }
 	  }]);
@@ -124,6 +136,7 @@
 	  return App;
 	}(_react2.default.Component);
 	
+	(0, _reactTapEventPlugin2.default)();
 	(0, _reactDom.render)(_react2.default.createElement(App, null), document.getElementById('app'));
 
 /***/ },
@@ -38795,336 +38808,7 @@
 	exports.default = SunBurst;
 
 /***/ },
-/* 181 */
-/*!**********************************************!*\
-  !*** ./src/client/app/sunburst/sequence.jsx ***!
-  \**********************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _d = __webpack_require__(/*! d3 */ 179);
-	
-	var d3 = _interopRequireWildcard(_d);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var explanationStyle = {
-	  position: 'absolute',
-	  top: '260px',
-	  left: '305px',
-	  width: '140px',
-	  textAlign: 'center',
-	  color: '#666',
-	  zIndex: -1,
-	  visibility: 'hidden'
-	};
-	
-	var SequenceSunBurst = function (_React$Component) {
-	  _inherits(SequenceSunBurst, _React$Component);
-	
-	  function SequenceSunBurst() {
-	    _classCallCheck(this, SequenceSunBurst);
-	
-	    return _possibleConstructorReturn(this, (SequenceSunBurst.__proto__ || Object.getPrototypeOf(SequenceSunBurst)).call(this));
-	  }
-	
-	  _createClass(SequenceSunBurst, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      // Dimensions of sunburst.
-	      var width = 750;
-	      var height = 600;
-	      var radius = Math.min(width, height) / 2;
-	
-	      var x = d3.scaleLinear().range([0, 2 * Math.PI]);
-	
-	      var y = d3.scaleLinear().range([0, radius]);
-	
-	      // Breadcrumb dimensions: width, height, spacing, width of tip/tail.
-	      var b = {
-	        w: 75, h: 30, s: 3, t: 10
-	      };
-	
-	      // Mapping of step names to colors.
-	      /*var colors = {
-	        "home": "#5687d1",
-	        "product": "#7b615c",
-	        "search": "#de783b",
-	        "account": "#6ab975",
-	        "other": "#a173d1",
-	        "end": "#bbbbbb"
-	      };*/
-	      var colors = d3.scaleOrdinal(d3.schemeCategory20);
-	      this.colors = colors;
-	
-	      // Total size of all segments; we set this later, after loading the data.
-	      var totalSize = 0;
-	
-	      var vis = d3.select("#chart").append("svg:svg").attr("width", width).attr("height", height).append("svg:g").attr("id", "container").attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-	
-	      var partition = d3.partition();
-	
-	      var arc = d3.arc().startAngle(function (d) {
-	        return Math.max(0, Math.min(2 * Math.PI, x(d.x0)));
-	      }).endAngle(function (d) {
-	        return Math.max(0, Math.min(2 * Math.PI, x(d.x1)));
-	      }).innerRadius(function (d) {
-	        return Math.max(0, y(d.y0));
-	      }).outerRadius(function (d) {
-	        return Math.max(0, y(d.y1));
-	      });
-	
-	      // Use d3.text and d3.csv.parseRows so that we do not need to have a header
-	      // row, and can receive the csv as an array of arrays.
-	      /*    d3.text("visit-sequences.csv", function(text) {
-	            var csv = d3.csv.parseRows(text);
-	            var json = buildHierarchy(csv);
-	            createVisualization(json);
-	          });*/
-	
-	      createVisualization(window.flare);
-	
-	      // Main function to draw and set up the visualization, once we have the data.
-	      function createVisualization(json) {
-	
-	        // Basic setup of page elements.
-	        initializeBreadcrumbTrail();
-	        drawLegend();
-	        d3.select("#togglelegend").on("click", toggleLegend);
-	
-	        // Bounding circle underneath the sunburst, to make it easier to detect
-	        // when the mouse leaves the parent g.
-	        vis.append("svg:circle").attr("r", radius).style("opacity", 0);
-	
-	        // For efficiency, filter nodes to keep only those large enough to see.
-	        var root = d3.hierarchy(window.flare);
-	        root.sum(function (d) {
-	          return d.size;
-	        });
-	
-	        var nodes = partition(root).descendants();
-	        // filtering filters out over half of nodes
-	        /*          .filter(function(d) {
-	                  var dx = d.x1 - d.x0;
-	                  return (dx > 0.005); // 0.005 radians = 0.29 degrees
-	                  });*/
-	
-	        // Determines max depth when entering data to paths
-	        var maxDepth = 0;
-	        var path = vis.data(nodes).selectAll("path").data(nodes).enter().append("svg:path").attr("display", function (d) {
-	          return d.depth ? null : "none";
-	        }).attr("d", arc).attr("fill-rule", "evenodd").style("fill", function (d) {
-	          if (d.depth > maxDepth) {
-	            maxDepth = d.depth;
-	          }
-	          return colors((d.children ? d : d.parent).data.name);
-	        }).style("opacity", 1).on("mouseover", mouseover);
-	
-	        // Bounding inner circle based on depth of elements
-	        var innerG = vis.append("g");
-	
-	        var innerBound = innerG.append("circle").attr("r", radius / (maxDepth + 1)).attr("id", "innerBound").style("opacity", 0);
-	
-	        var innerText = innerG.append("text").attr("id", "percentage").attr("x", -20).attr("y", 0).text("");
-	
-	        // Add the mouseleave handler to the bounding circle.
-	        d3.select("#container").on("mouseleave", mouseleave);
-	
-	        // Get total size of the tree = value of root node from partition.
-	        totalSize = path.node().__data__.value;
-	      };
-	
-	      // Fade all but the current sequence, and show it in the breadcrumb trail.
-	      function mouseover(d) {
-	
-	        var percentage = (100 * d.value / totalSize).toPrecision(3);
-	        var percentageString = percentage + "%";
-	        if (percentage < 0.1) {
-	          percentageString = "< 0.1%";
-	        }
-	
-	        d3.select("#percentage").text(percentageString);
-	
-	        d3.select("#explanation").style("visibility", "");
-	
-	        var sequenceArray = getAncestors(d);
-	        updateBreadcrumbs(sequenceArray, percentageString);
-	
-	        // Fade all the segments.
-	        d3.selectAll("path").style("opacity", 0.3);
-	
-	        // Then highlight only those that are an ancestor of the current segment.
-	        vis.selectAll("path").filter(function (node) {
-	          return sequenceArray.indexOf(node) >= 0;
-	        }).style("opacity", 1);
-	      }
-	
-	      // Restore everything to full opacity when moving off the visualization.
-	      function mouseleave(d) {
-	
-	        // Hide the breadcrumb trail
-	        d3.select("#trail").style("visibility", "hidden");
-	
-	        // Deactivate all segments during transition.
-	        d3.selectAll("path").on("mouseover", null);
-	
-	        // Transition each segment to full opacity and then reactivate it.
-	        d3.selectAll("path").transition().duration(1000).style("opacity", 1).on("end", function () {
-	          d3.select(this).on("mouseover", mouseover);
-	          d3.select("#percentage").text("");
-	        });
-	
-	        d3.select("#explanation").style("visibility", "hidden");
-	      }
-	
-	      // Given a node in a partition layout, return an array of all of its ancestor
-	      // nodes, highest first, but excluding the root.
-	      function getAncestors(node) {
-	        var path = [];
-	        var current = node;
-	        while (current.parent) {
-	          path.unshift(current);
-	          current = current.parent;
-	        }
-	        return path;
-	      }
-	
-	      function initializeBreadcrumbTrail() {
-	        // Add the svg area.
-	        var trail = d3.select("#sequence").append("svg:svg").attr("width", width).attr("height", 50).attr("id", "trail");
-	        // Add the label at the end, for the percentage.
-	        trail.append("svg:text").attr("id", "endlabel").style("fill", "#000");
-	      }
-	
-	      // Generate a string that describes the points of a breadcrumb polygon.
-	      function breadcrumbPoints(d, i) {
-	        var points = [];
-	        points.push("0,0");
-	        points.push(b.w + ",0");
-	        points.push(b.w + b.t + "," + b.h / 2);
-	        points.push(b.w + "," + b.h);
-	        points.push("0," + b.h);
-	        if (i > 0) {
-	          // Leftmost breadcrumb; don't include 6th vertex.
-	          points.push(b.t + "," + b.h / 2);
-	        }
-	        return points.join(" ");
-	      }
-	
-	      var context = this;
-	      // Update the breadcrumb trail to show the current sequence and percentage.
-	      function updateBreadcrumbs(nodeArray, percentageString) {
-	        // Data join; key function combines name and depth (= position in sequence).
-	        var g = d3.select("#trail").selectAll("g").data(nodeArray, function (d) {
-	          return d.data.name + d.depth;
-	        });
-	
-	        // Add breadcrumb and label for entering nodes.
-	        var entering = g.enter().append("g");
-	
-	        entering.append("svg:polygon").attr("points", breadcrumbPoints).style("fill", function (d) {
-	          return colors((d.children ? d : d.parent).data.name);
-	        });
-	
-	        entering.append("svg:text").attr("x", (b.w + b.t) / 2).attr("y", b.h / 2).attr("dy", "0.35em").attr("text-anchor", "middle").text(function (d) {
-	          return d.data.name;
-	        });
-	
-	        // Set position for entering and updating nodes.
-	        d3.select("#trail").selectAll("g").attr("transform", function (d, i) {
-	          return "translate(" + (d.depth - 1) * (b.w + b.s) + ", 0)";
-	        });
-	
-	        // Remove exiting nodes.
-	        g.exit().remove();
-	
-	        // Now move and update the percentage at the end.
-	        d3.select("#trail").select("#endlabel").attr("x", (nodeArray.length + 0.5) * (b.w + b.s)).attr("y", b.h / 2).attr("dy", "0.35em").attr("text-anchor", "middle").text(percentageString);
-	
-	        // Make the breadcrumb trail visible, if it's hidden.
-	        d3.select("#trail").style("visibility", "");
-	      }
-	
-	      function drawLegend() {
-	
-	        // Dimensions of legend item: width, height, spacing, radius of rounded rect.
-	        var li = {
-	          w: 75, h: 30, s: 3, r: 3
-	        };
-	
-	        var legend = d3.select("#legend").append("svg:svg").attr("width", li.w).attr("height", d3.keys(colors).length * (li.h + li.s));
-	
-	        var g = legend.selectAll("g").data(d3.entries(colors)).enter().append("svg:g").attr("transform", function (d, i) {
-	          return "translate(0," + i * (li.h + li.s) + ")";
-	        });
-	
-	        g.append("svg:rect").attr("rx", li.r).attr("ry", li.r).attr("width", li.w).attr("height", li.h).style("fill", function (d) {
-	          return d.value;
-	        });
-	
-	        g.append("svg:text").attr("x", li.w / 2).attr("y", li.h / 2).attr("dy", "0.35em").attr("text-anchor", "middle").text(function (d) {
-	          return d.key;
-	        });
-	      }
-	
-	      function toggleLegend() {
-	        var legend = d3.select("#legend");
-	        if (legend.style("visibility") == "hidden") {
-	          legend.style("visibility", "");
-	        } else {
-	          legend.style("visibility", "hidden");
-	        }
-	      }
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'div',
-	          { id: 'main' },
-	          _react2.default.createElement('div', { id: 'sequence' }),
-	          _react2.default.createElement('div', { id: 'chart' })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { id: 'sidebar' },
-	          _react2.default.createElement('input', { type: 'checkbox', id: 'togglelegend' }),
-	          ' Legend',
-	          _react2.default.createElement('br', null),
-	          _react2.default.createElement('div', { id: 'legend', style: { visibility: "hidden" } })
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return SequenceSunBurst;
-	}(_react2.default.Component);
-	
-	exports.default = SequenceSunBurst;
-
-/***/ },
+/* 181 */,
 /* 182 */
 /*!*********************************************!*\
   !*** ./src/client/app/dnd-tree/dndTree.jsx ***!
@@ -39248,146 +38932,7 @@
 	exports.default = DndTree;
 
 /***/ },
-/* 183 */
-/*!****************************************************!*\
-  !*** ./src/client/app/zoomableMap/zoomableMap.jsx ***!
-  \****************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _d = __webpack_require__(/*! d3 */ 179);
-	
-	var d3 = _interopRequireWildcard(_d);
-	
-	var _topojson = __webpack_require__(/*! topojson */ 184);
-	
-	var topojson = _interopRequireWildcard(_topojson);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var ZoomableMap = function (_React$Component) {
-	  _inherits(ZoomableMap, _React$Component);
-	
-	  function ZoomableMap(props) {
-	    _classCallCheck(this, ZoomableMap);
-	
-	    var _this = _possibleConstructorReturn(this, (ZoomableMap.__proto__ || Object.getPrototypeOf(ZoomableMap)).call(this, props));
-	
-	    _this.state = {
-	      width: 960,
-	      height: 500,
-	      centered: null,
-	      options: {
-	        // 'polyFill': this.props.polyFill || 'none',
-	
-	      }
-	    };
-	    _this.click = _this.click.bind(_this);
-	
-	    return _this;
-	  }
-	
-	  _createClass(ZoomableMap, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var _this2 = this;
-	
-	      var svg, projection, path, background, g, us;
-	
-	      svg = d3.select('.zoomableMap');
-	      projection = d3.geoAlbersUsa().scale(1070).translate([480, 250]);
-	      path = d3.geoPath().projection(projection);
-	      background = svg.append('rect').attr('width', this.state.width).attr('height', this.state.height).attr('fill', 'none').attr('pointer-events', 'all').on('click', this.click);
-	      g = svg.append('g').attr('id', 'temp');
-	
-	      d3.json('usamap', function (err, us) {
-	        if (err) {
-	          throw err;
-	        }
-	        g.append('g').attr('id', 'states').attr('fill', '#aaa').selectAll('path').data(topojson.feature(us, us.objects.states).features).enter().append('path').attr('d', path).on('click', _this2.click);
-	
-	        g.append('path').datum(topojson.mesh(us, us.objects.states, function (a, b) {
-	          return a !== b;
-	        })).attr('id', 'state-borders').attr('d', path).attr('fill', 'none').attr('stroke', '#fff').attr('stroke-width', '1.5px').attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round').attr('pointer-events', 'none');
-	      });
-	
-	      this.setState({
-	        projection: projection,
-	        path: path,
-	        g: g
-	      });
-	    }
-	  }, {
-	    key: 'click',
-	    value: function click(d) {
-	      var _this3 = this;
-	
-	      var x, y, k;
-	
-	      if (d && this.state.centered !== d) {
-	        this.setState({ centered: d });
-	        var centroid = this.state.path.centroid(d);
-	        x = centroid[0];
-	        y = centroid[1];
-	        k = 4;
-	      } else {
-	        this.setState({ centered: null });
-	        x = this.state.width / 2;
-	        y = this.state.height / 2;
-	        k = 1;
-	        d3.select('#temp').selectAll('path').classed('active', false);
-	      }
-	
-	      this.state.g.selectAll('path').classed('active', this.state.centered && function (x) {
-	        return x === _this3.state.centered;
-	      });
-	
-	      d3.selectAll('#states path').attr('fill', '#aaa');
-	      d3.select('.active').attr('fill', 'orange');
-	      console.log(d3.selectAll('#states path'));
-	
-	      d3.select('#temp').transition().duration(750).attr('transform', 'translate(' + this.state.width / 2 + ',' + this.state.height / 2 + ')scale(' + k + ')translate(' + -x + ',' + -y + ')').style('stroke-width', 1.5 / k + 'px');
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement('svg', {
-	          width: this.state.width,
-	          height: this.state.height,
-	          className: 'zoomableMap'
-	        })
-	      );
-	    }
-	  }]);
-	
-	  return ZoomableMap;
-	}(_react2.default.Component);
-	
-	exports.default = ZoomableMap;
-
-/***/ },
+/* 183 */,
 /* 184 */
 /*!*************************************!*\
   !*** ./~/topojson/dist/topojson.js ***!
@@ -41307,10 +40852,15 @@
 
 
 /***/ },
-/* 185 */
-/*!********************************************************!*\
-  !*** ./src/client/app/circlePacking/circlePacking.jsx ***!
-  \********************************************************/
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */
+/*!***********************************************!*\
+  !*** ./src/client/app/documentation/Main.jsx ***!
+  \***********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41325,11 +40875,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _d = __webpack_require__(/*! d3 */ 179);
+	var _sunburst = __webpack_require__(/*! ../sunburst/sunburst.jsx */ 180);
 	
-	var d3 = _interopRequireWildcard(_d);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	var _sunburst2 = _interopRequireDefault(_sunburst);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -41339,141 +40887,445 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var CirclePacking = function (_React$Component) {
-	  _inherits(CirclePacking, _React$Component);
+	var Main = function (_Component) {
+	  _inherits(Main, _Component);
 	
-	  function CirclePacking(props) {
-	    _classCallCheck(this, CirclePacking);
+	  function Main() {
+	    _classCallCheck(this, Main);
 	
-	    var _this = _possibleConstructorReturn(this, (CirclePacking.__proto__ || Object.getPrototypeOf(CirclePacking)).call(this, props));
-	
-	    _this.state = {
-	      width: 960,
-	      height: 960,
-	      options: {
-	        // styles here!
-	      }
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
 	  }
 	
-	  _createClass(CirclePacking, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var svg = d3.select(".circle-packing"),
-	          margin = 20,
-	          diameter = +svg.attr("width"),
-	          g = svg.append("g").attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
-	
-	      var color = d3.scaleLinear().domain([-1, 5]).range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"]).interpolate(d3.interpolateHcl);
-	
-	      var pack = d3.pack().size([diameter - margin, diameter - margin]).padding(2);
-	
-	      d3.json("/flare", function (error, root) {
-	        if (error) throw error;
-	
-	        root = d3.hierarchy(root).sum(function (d) {
-	          return d.size;
-	        }).sort(function (a, b) {
-	          return b.value - a.value;
-	        });
-	
-	        var focus = root,
-	            nodes = pack(root).descendants(),
-	            view;
-	
-	        var circle = g.selectAll("circle").data(nodes).enter().append("circle").attr("class", function (d) {
-	          return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root";
-	        }).style("fill", function (d) {
-	          return d.children ? color(d.depth) : 'white';
-	        }).on("click", function (d) {
-	          if (focus !== d) zoom(d), d3.event.stopPropagation();
-	        });
-	
-	        var text = g.selectAll("text").data(nodes).enter().append("text").attr("class", "label").style("fill-opacity", function (d) {
-	          return d.parent === root ? 1 : 0;
-	        }).style("display", function (d) {
-	          return d.parent === root ? "inline" : "none";
-	        }).text(function (d) {
-	          return d.data.name;
-	        });
-	
-	        var node = g.selectAll("circle,text");
-	
-	        node.style('cursor', 'pointer').on('mouseover', function (d) {
-	          var nodeSelection = d3.select(this).style('stroke', '#000').style('stroke-width', '1.5px');
-	        }).on('mouseout', function (d) {
-	          var nodeSelection = d3.select(this).style('stroke', '#000').style('stroke-width', '0px');
-	        });
-	
-	        svg.style("background", color(-1)).on("click", function () {
-	          zoom(root);
-	        });
-	
-	        zoomTo([root.x, root.y, root.r * 2 + margin]);
-	
-	        function zoom(d) {
-	          var focus0 = focus;
-	          focus = d;
-	
-	          var transition = d3.transition().duration(d3.event.altKey ? 7500 : 750).tween("zoom", function (d) {
-	            var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
-	            return function (t) {
-	              zoomTo(i(t));
-	            };
-	          });
-	
-	          //filter text to display per zoom is not working :/
-	          var text = transition.selectAll("text");
-	          // console.log('selected text', text);
-	          // text.filter((d) => {
-	          //   console.log('parent', d.parent);
-	          // });
-	          // text.filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
-	          //   .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
-	          //   .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
-	          //   .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
-	        }
-	
-	        function zoomTo(v) {
-	          var k = diameter / v[2];view = v;
-	          node.attr("transform", function (d) {
-	            return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")";
-	          });
-	          circle.attr("r", function (d) {
-	            return d.r * k;
-	          });
-	        }
-	
-	        svg.selectAll('.label').style('font', '11px "Helvetica Neue", Helvetica, Arial, sans-serif').style('text-anchor', 'middle').style('text-shadow', '0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff');
-	      });
-	    }
-	  }, {
+	  _createClass(Main, [{
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement('svg', {
-	          width: this.state.width,
-	          height: this.state.height,
-	          className: 'circle-packing' })
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Main Page'
+	        )
 	      );
 	    }
 	  }]);
 	
-	  return CirclePacking;
-	}(_react2.default.Component);
+	  return Main;
+	}(_react.Component);
 	
-	exports.default = CirclePacking;
+	exports.default = Main;
 
 /***/ },
-/* 186 */,
-/* 187 */,
-/* 188 */,
-/* 189 */
+/* 191 */
+/*!*****************************************************!*\
+  !*** ./src/client/app/documentation/Navigation.jsx ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-router\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _MuiThemeProvider = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"material-ui/styles/MuiThemeProvider\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _MuiThemeProvider2 = _interopRequireDefault(_MuiThemeProvider);
+	
+	var _getMuiTheme = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"material-ui/styles/getMuiTheme\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _getMuiTheme2 = _interopRequireDefault(_getMuiTheme);
+	
+	var _colors = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"material-ui/styles/colors\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _AppBar = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"material-ui/AppBar\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _AppBar2 = _interopRequireDefault(_AppBar);
+	
+	var _Drawer = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"material-ui/Drawer\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _Drawer2 = _interopRequireDefault(_Drawer);
+	
+	var _Divider = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"material-ui/Divider\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _Divider2 = _interopRequireDefault(_Divider);
+	
+	var _MenuItem = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"material-ui/MenuItem\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _MenuItem2 = _interopRequireDefault(_MenuItem);
+	
+	var _arrowDropDown = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"material-ui/svg-icons/navigation/arrow-drop-down\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _arrowDropDown2 = _interopRequireDefault(_arrowDropDown);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var styles = {
+	  container: { textAlign: 'center', paddingTop: 200
+	  }
+	};
+	
+	var muiTheme = (0, _getMuiTheme2.default)({
+	  palette: { accent1Color: _colors.deepOrange500 }
+	});
+	
+	var linkStyle = {
+	  color: 'white',
+	  'textDecoration': 'none'
+	};
+	
+	var Navigation = function (_Component) {
+	  _inherits(Navigation, _Component);
+	
+	  function Navigation() {
+	    _classCallCheck(this, Navigation);
+	
+	    var _this = _possibleConstructorReturn(this, (Navigation.__proto__ || Object.getPrototypeOf(Navigation)).call(this));
+	
+	    _this.handleDrawerToggle = function () {
+	      return _this.setState({ open: !_this.state.open });
+	    };
+	
+	    _this.handleClose = function () {
+	      return _this.setState({ open: false });
+	    };
+	
+	    _this.state = {
+	      open: false
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(Navigation, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        _MuiThemeProvider2.default,
+	        { muiTheme: muiTheme },
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(_AppBar2.default, {
+	            onLeftIconButtonTouchTap: this.handleDrawerToggle }),
+	          _react2.default.createElement(
+	            _Drawer2.default,
+	            {
+	              docked: false,
+	              open: this.state.open,
+	              onRequestChange: this.handleClose },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/start', style: linkStyle },
+	              _react2.default.createElement(
+	                _MenuItem2.default,
+	                null,
+	                'Get Started'
+	              )
+	            ),
+	            _react2.default.createElement(_MenuItem2.default, {
+	              primaryText: 'Components',
+	              rightIcon: _react2.default.createElement(_arrowDropDown2.default, null),
+	              menuItems: [_react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/voronoi', style: linkStyle },
+	                _react2.default.createElement(_MenuItem2.default, { primaryText: 'Voronoi' })
+	              ), _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/sunburst', style: linkStyle },
+	                _react2.default.createElement(_MenuItem2.default, { primaryText: 'SunBurst' })
+	              ), _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/zoommap', style: linkStyle },
+	                _react2.default.createElement(_MenuItem2.default, { primaryText: 'Zoomable Map' })
+	              ), _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/hierarchical', style: linkStyle },
+	                _react2.default.createElement(_MenuItem2.default, { primaryText: 'Hierarchical' })
+	              ), _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/dndtree', style: linkStyle },
+	                _react2.default.createElement(_MenuItem2.default, { primaryText: 'Dnd Tree' })
+	              )] }),
+	            _react2.default.createElement(_Divider2.default, null),
+	            _react2.default.createElement(
+	              'a',
+	              { href: 'https://github.com/team-parsnips/ReD3', style: linkStyle },
+	              _react2.default.createElement(
+	                _MenuItem2.default,
+	                null,
+	                'GitHub'
+	              )
+	            )
+	          ),
+	          this.props.children
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Navigation;
+	}(_react.Component);
+	
+	exports.default = Navigation;
+
+/***/ },
+/* 192 */
+/*!************************************************!*\
+  !*** ./src/client/app/documentation/Start.jsx ***!
+  \************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Start = function (_Component) {
+	  _inherits(Start, _Component);
+	
+	  function Start() {
+	    _classCallCheck(this, Start);
+	
+	    return _possibleConstructorReturn(this, (Start.__proto__ || Object.getPrototypeOf(Start)).call(this));
+	  }
+	
+	  _createClass(Start, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Get Started'
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Start;
+	}(_react.Component);
+	
+	exports.default = Start;
+
+/***/ },
+/* 193 */
+/*!*****************************************************!*\
+  !*** ./src/client/app/documentation/VoronoiDoc.jsx ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _voronoi = __webpack_require__(/*! ../voronoi/voronoi.jsx */ 178);
+	
+	var _voronoi2 = _interopRequireDefault(_voronoi);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var VoronoiDoc = function (_Component) {
+	  _inherits(VoronoiDoc, _Component);
+	
+	  function VoronoiDoc() {
+	    _classCallCheck(this, VoronoiDoc);
+	
+	    return _possibleConstructorReturn(this, (VoronoiDoc.__proto__ || Object.getPrototypeOf(VoronoiDoc)).call(this));
+	  }
+	
+	  _createClass(VoronoiDoc, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Voronoi'
+	        ),
+	        _react2.default.createElement(_voronoi2.default, null)
+	      );
+	    }
+	  }]);
+	
+	  return VoronoiDoc;
+	}(_react.Component);
+	
+	exports.default = VoronoiDoc;
+
+/***/ },
+/* 194 */
+/*!******************************************************!*\
+  !*** ./src/client/app/documentation/SunburstDoc.jsx ***!
+  \******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _sunburst = __webpack_require__(/*! ../sunburst/sunburst.jsx */ 180);
+	
+	var _sunburst2 = _interopRequireDefault(_sunburst);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var SunburstDoc = function (_Component) {
+	  _inherits(SunburstDoc, _Component);
+	
+	  function SunburstDoc() {
+	    _classCallCheck(this, SunburstDoc);
+	
+	    return _possibleConstructorReturn(this, (SunburstDoc.__proto__ || Object.getPrototypeOf(SunburstDoc)).call(this));
+	  }
+	
+	  _createClass(SunburstDoc, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Sunburst'
+	        ),
+	        _react2.default.createElement(_sunburst2.default, null)
+	      );
+	    }
+	  }]);
+	
+	  return SunburstDoc;
+	}(_react.Component);
+	
+	exports.default = SunburstDoc;
+
+/***/ },
+/* 195 */
+/*!*****************************************************!*\
+  !*** ./src/client/app/documentation/ZoomMapDoc.jsx ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _zoomableMap = __webpack_require__(/*! ../ZoomableMap/zoomableMap.jsx */ 196);
+	
+	var _zoomableMap2 = _interopRequireDefault(_zoomableMap);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ZoomMapDoc = function (_Component) {
+	  _inherits(ZoomMapDoc, _Component);
+	
+	  function ZoomMapDoc() {
+	    _classCallCheck(this, ZoomMapDoc);
+	
+	    return _possibleConstructorReturn(this, (ZoomMapDoc.__proto__ || Object.getPrototypeOf(ZoomMapDoc)).call(this));
+	  }
+	
+	  _createClass(ZoomMapDoc, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Zoomable Map'
+	        ),
+	        _react2.default.createElement(_zoomableMap2.default, null)
+	      );
+	    }
+	  }]);
+	
+	  return ZoomMapDoc;
+	}(_react.Component);
+	
+	exports.default = ZoomMapDoc;
+
+/***/ },
+/* 196 */
 /*!****************************************************!*\
-  !*** ./src/client/app/scatterPlot/scatterPlot.jsx ***!
+  !*** ./src/client/app/ZoomableMap/zoomableMap.jsx ***!
   \****************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
@@ -41493,6 +41345,10 @@
 	
 	var d3 = _interopRequireWildcard(_d);
 	
+	var _topojson = __webpack_require__(/*! topojson */ 184);
+	
+	var topojson = _interopRequireWildcard(_topojson);
+	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -41503,98 +41359,417 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var ScatterPlot = function (_React$Component) {
-	  _inherits(ScatterPlot, _React$Component);
+	var ZoomableMap = function (_React$Component) {
+	  _inherits(ZoomableMap, _React$Component);
 	
-	  function ScatterPlot(props) {
-	    _classCallCheck(this, ScatterPlot);
+	  function ZoomableMap(props) {
+	    _classCallCheck(this, ZoomableMap);
 	
-	    var _this = _possibleConstructorReturn(this, (ScatterPlot.__proto__ || Object.getPrototypeOf(ScatterPlot)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (ZoomableMap.__proto__ || Object.getPrototypeOf(ZoomableMap)).call(this, props));
 	
 	    _this.state = {
 	      width: 960,
-	      height: 960,
+	      height: 500,
+	      centered: null,
 	      options: {
-	        // styles here!
+	        // 'polyFill': this.props.polyFill || 'none',
+	
 	      }
 	    };
+	    _this.click = _this.click.bind(_this);
+	
 	    return _this;
 	  }
 	
-	  _createClass(ScatterPlot, [{
+	  _createClass(ZoomableMap, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var margin = { top: 20, right: 20, bottom: 30, left: 40 },
-	          width = 960 - margin.left - margin.right,
-	          height = 500 - margin.top - margin.bottom;
+	      var _this2 = this;
 	
-	      var x = d3.scaleLinear().range([0, width]);
+	      var svg, projection, path, background, g, us;
 	
-	      var y = d3.scaleLinear().range([height, 0]);
+	      svg = d3.select('.zoomableMap');
+	      projection = d3.geoAlbersUsa().scale(1070).translate([480, 250]);
+	      path = d3.geoPath().projection(projection);
+	      background = svg.append('rect').attr('width', this.state.width).attr('height', this.state.height).attr('fill', 'none').attr('pointer-events', 'all').on('click', this.click);
+	      g = svg.append('g').attr('id', 'temp');
 	
-	      var color = d3.scaleOrdinal(d3.schemeCategory10);
+	      d3.json('usamap', function (err, us) {
+	        if (err) {
+	          throw err;
+	        }
+	        g.append('g').attr('id', 'states').attr('fill', '#aaa').selectAll('path').data(topojson.feature(us, us.objects.states).features).enter().append('path').attr('d', path).on('click', _this2.click);
 	
-	      var valueline = d3.line().x(function (d) {
-	        return x(d.close);
-	      }).y(function (d) {
-	        return y(d.close);
+	        g.append('path').datum(topojson.mesh(us, us.objects.states, function (a, b) {
+	          return a !== b;
+	        })).attr('id', 'state-borders').attr('d', path).attr('fill', 'none').attr('stroke', '#fff').attr('stroke-width', '1.5px').attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round').attr('pointer-events', 'none');
 	      });
 	
-	      var svg = d3.select(".scatter-plot").append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-	
-	      d3.tsv("/tsvData", function (error, data) {
-	        if (error) throw error;
-	
-	        // console.log ('data', data);
-	
-	        data.forEach(function (d) {
-	          var datum = d["sepalLength sepalWidth petalLength petalWidth species"].split(' ');
-	          d.sepalLength = +datum[0];
-	          d.sepalWidth = +datum[1];
-	          d.species = datum[4];
-	        });
-	
-	        x.domain(d3.extent(data, function (d) {
-	          d.sepalWidth;
-	        }));
-	        y.domain(d3.extent(data, function (d) {
-	          d.sepalLength;
-	        }));
-	
-	        svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + height + ")").call(valueline.x).append("text").attr("class", "label").attr("x", width).attr("y", -6).style("text-anchor", "end").text("Sepal Width (cm)");
-	
-	        svg.append("g").attr("class", "y axis").call(valueline.y).append("text").attr("class", "label").attr("transform", "rotate(-90)").attr("y", 6).attr("dy", ".71em").style("text-anchor", "end").text("Sepal Length (cm)");
-	
-	        svg.selectAll(".dot").data(data).enter().append("circle").attr("class", "dot").attr("r", 3.5).attr("cx", function (d) {
-	          x(d.sepalWidth);
-	        }).attr("cy", function (d) {
-	          y(d.sepalLength);
-	        }).style("fill", function (d) {
-	          color(d.species);
-	        });
-	
-	        var legend = svg.selectAll(".legend").data(color.domain()).enter().append("g").attr("class", "legend").attr("transform", function (d, i) {
-	          return "translate(0," + i * 20 + ")";
-	        });
-	
-	        legend.append("rect").attr("x", width - 18).attr("width", 18).attr("height", 18).style("fill", color);
-	
-	        legend.append("text").attr("x", width - 24).attr("y", 9).attr("dy", ".35em").style("text-anchor", "end").text(function (d) {
-	          return d;
-	        });
+	      this.setState({
+	        projection: projection,
+	        path: path,
+	        g: g
 	      });
+	    }
+	  }, {
+	    key: 'click',
+	    value: function click(d) {
+	      var _this3 = this;
+	
+	      var x, y, k;
+	
+	      if (d && this.state.centered !== d) {
+	        this.setState({ centered: d });
+	        var centroid = this.state.path.centroid(d);
+	        x = centroid[0];
+	        y = centroid[1];
+	        k = 4;
+	      } else {
+	        this.setState({ centered: null });
+	        x = this.state.width / 2;
+	        y = this.state.height / 2;
+	        k = 1;
+	        d3.select('#temp').selectAll('path').classed('active', false);
+	      }
+	
+	      this.state.g.selectAll('path').classed('active', this.state.centered && function (x) {
+	        return x === _this3.state.centered;
+	      });
+	
+	      d3.selectAll('#states path').attr('fill', '#aaa');
+	      d3.select('.active').attr('fill', 'orange');
+	      console.log(d3.selectAll('#states path'));
+	
+	      d3.select('#temp').transition().duration(750).attr('transform', 'translate(' + this.state.width / 2 + ',' + this.state.height / 2 + ')scale(' + k + ')translate(' + -x + ',' + -y + ')').style('stroke-width', 1.5 / k + 'px');
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement('div', { className: 'scatter-plot' });
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement('svg', {
+	          width: this.state.width,
+	          height: this.state.height,
+	          className: 'zoomableMap'
+	        })
+	      );
 	    }
 	  }]);
 	
-	  return ScatterPlot;
+	  return ZoomableMap;
 	}(_react2.default.Component);
 	
-	exports.default = ScatterPlot;
+	exports.default = ZoomableMap;
+
+/***/ },
+/* 197 */
+/*!**********************************************************!*\
+  !*** ./src/client/app/documentation/HierarchicalDoc.jsx ***!
+  \**********************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _hierarchical = __webpack_require__(/*! ../hierarchical/hierarchical.jsx */ 198);
+	
+	var _hierarchical2 = _interopRequireDefault(_hierarchical);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var HierarchicalDoc = function (_Component) {
+	  _inherits(HierarchicalDoc, _Component);
+	
+	  function HierarchicalDoc() {
+	    _classCallCheck(this, HierarchicalDoc);
+	
+	    return _possibleConstructorReturn(this, (HierarchicalDoc.__proto__ || Object.getPrototypeOf(HierarchicalDoc)).call(this));
+	  }
+	
+	  _createClass(HierarchicalDoc, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Hierarchical Edge Bundle'
+	        ),
+	        _react2.default.createElement(_hierarchical2.default, null)
+	      );
+	    }
+	  }]);
+	
+	  return HierarchicalDoc;
+	}(_react.Component);
+	
+	exports.default = HierarchicalDoc;
+
+/***/ },
+/* 198 */
+/*!******************************************************!*\
+  !*** ./src/client/app/hierarchical/hierarchical.jsx ***!
+  \******************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _d = __webpack_require__(/*! d3 */ 179);
+	
+	var d3 = _interopRequireWildcard(_d);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var HierarchicalEdgeBundle = function (_React$Component) {
+	  _inherits(HierarchicalEdgeBundle, _React$Component);
+	
+	  function HierarchicalEdgeBundle() {
+	    _classCallCheck(this, HierarchicalEdgeBundle);
+	
+	    return _possibleConstructorReturn(this, (HierarchicalEdgeBundle.__proto__ || Object.getPrototypeOf(HierarchicalEdgeBundle)).call(this));
+	  }
+	
+	  _createClass(HierarchicalEdgeBundle, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	
+	      var diameter = 960,
+	          radius = diameter / 2,
+	          innerRadius = radius - 120;
+	
+	      var cluster = d3.cluster().size([360, innerRadius]);
+	      //.nodeSize(function(d) { return d.size; });
+	
+	      var bundle = d3.curveBundle();
+	
+	      var line = d3.radialLine()
+	      /*        .interpolate("bundle")
+	              .tension(.85)*/
+	      .radius(function (d) {
+	        return d.y;
+	      }).angle(function (d) {
+	        return d.x / 180 * Math.PI;
+	      });
+	
+	      var svg = d3.select("#hierarchical").append("svg").attr("width", diameter).attr("height", diameter).append("g").attr("transform", "translate(" + radius + "," + radius + ")");
+	
+	      var link = svg.append("g").selectAll(".link"),
+	          node = svg.append("g").selectAll(".node");
+	
+	      /*    d3.json("readme-flare-imports.json", function(error, classes) {
+	            if (error) throw error;*/
+	
+	      var hierarchy = packageHierarchy(window.flare2);
+	
+	      var hierarchy2 = d3.hierarchy(hierarchy);
+	      //hierarchy2.sum(function(d) { return d.size; });
+	      console.log('hierarchy native', hierarchy2);
+	
+	      var nodes = cluster(hierarchy2);
+	      console.log('nodes', nodes);
+	
+	      var links = packageImports(nodes);
+	      console.log('links', links);
+	
+	      console.log('bundle', bundle);
+	      link = link.data(d3.curveBundle(links)).enter().append("path").each(function (d) {
+	        d.source = d[0], d.target = d[d.length - 1];
+	      }).attr("class", "link").attr("d", line);
+	
+	      node = node.data(nodes.descendants().filter(function (n) {
+	        return !n.children;
+	      })).enter().append("text").attr("class", "node").attr("dy", ".31em").attr("transform", function (d) {
+	        return "rotate(" + (d.x - 90) + ")translate(" + (d.y + 8) + ",0)" + (d.x < 180 ? "" : "rotate(180)");
+	      }).style("text-anchor", function (d) {
+	        return d.x < 180 ? "start" : "end";
+	      }).text(function (d) {
+	        return d.data.key;
+	      }).on("mouseover", mouseovered).on("mouseout", mouseouted);
+	      /*    });*/
+	
+	      function mouseovered(d) {
+	        node.each(function (n) {
+	          n.target = n.source = false;
+	        });
+	
+	        link.classed("link--target", function (l) {
+	          if (l.target === d) return l.source.source = true;
+	        }).classed("link--source", function (l) {
+	          if (l.source === d) return l.target.target = true;
+	        }).filter(function (l) {
+	          return l.target === d || l.source === d;
+	        }).each(function () {
+	          this.parentNode.appendChild(this);
+	        });
+	
+	        node.classed("node--target", function (n) {
+	          return n.target;
+	        }).classed("node--source", function (n) {
+	          return n.source;
+	        });
+	      }
+	
+	      function mouseouted(d) {
+	        link.classed("link--target", false).classed("link--source", false);
+	
+	        node.classed("node--target", false).classed("node--source", false);
+	      }
+	
+	      d3.select(self.frameElement).style("height", diameter + "px");
+	
+	      // Lazily construct the package hierarchy from class names.
+	      function packageHierarchy(classes) {
+	        var map = {};
+	
+	        function find(name, data) {
+	          var node = map[name],
+	              i;
+	          if (!node) {
+	            node = map[name] = data || { name: name, children: [] };
+	            if (name.length) {
+	              node.parent = find(name.substring(0, i = name.lastIndexOf(".")));
+	              node.parent.children.push(node);
+	              node.key = name.substring(i + 1);
+	            }
+	          }
+	          return node;
+	        }
+	
+	        classes.forEach(function (d) {
+	          find(d.name, d);
+	        });
+	
+	        return map[""];
+	      }
+	
+	      // Return a list of imports for the given array of nodes.
+	      function packageImports(nodes) {
+	        var map = {},
+	            imports = [];
+	
+	        // Compute a map from name to node.
+	        nodes.descendants().forEach(function (d) {
+	          map[d.name] = d;
+	        });
+	
+	        // For each import, construct a link from the source to target node.
+	        nodes.descendants().forEach(function (d) {
+	          if (d.imports) d.imports.forEach(function (i) {
+	            imports.push({ source: map[d.name], target: map[i] });
+	          });
+	        });
+	
+	        return imports;
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement('div', { id: "hierarchical" });
+	    }
+	  }]);
+	
+	  return HierarchicalEdgeBundle;
+	}(_react2.default.Component);
+	
+	exports.default = HierarchicalEdgeBundle;
+
+/***/ },
+/* 199 */
+/*!*****************************************************!*\
+  !*** ./src/client/app/documentation/DndTreeDoc.jsx ***!
+  \*****************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _dndTree = __webpack_require__(/*! ../dnd-tree/dndTree.jsx */ 182);
+	
+	var _dndTree2 = _interopRequireDefault(_dndTree);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var DndTreeDoc = function (_Component) {
+	  _inherits(DndTreeDoc, _Component);
+	
+	  function DndTreeDoc() {
+	    _classCallCheck(this, DndTreeDoc);
+	
+	    return _possibleConstructorReturn(this, (DndTreeDoc.__proto__ || Object.getPrototypeOf(DndTreeDoc)).call(this));
+	  }
+	
+	  _createClass(DndTreeDoc, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Drag \'n Drop Tree'
+	        ),
+	        _react2.default.createElement(_dndTree2.default, null)
+	      );
+	    }
+	  }]);
+	
+	  return DndTreeDoc;
+	}(_react.Component);
+	
+	exports.default = DndTreeDoc;
 
 /***/ }
 /******/ ]);
