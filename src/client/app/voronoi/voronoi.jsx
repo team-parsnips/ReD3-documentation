@@ -37,6 +37,7 @@ class Voronoi extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.state.dataSet);
     var svg, voronoi, polygon, link, site;
 
     svg     = d3.select('.voronoi');
