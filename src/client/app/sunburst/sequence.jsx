@@ -36,14 +36,16 @@ class SequenceSunBurst extends React.Component {
     };
 
     // Mapping of step names to colors.
-    var colors = {
+    /*var colors = {
       "home": "#5687d1",
       "product": "#7b615c",
       "search": "#de783b",
       "account": "#6ab975",
       "other": "#a173d1",
       "end": "#bbbbbb"
-    };
+    };*/
+    var colors = d3.scaleOrdinal(d3.schemeCategory20);
+    this.colors = colors;
 
     // Total size of all segments; we set this later, after loading the data.
     var totalSize = 0; 
@@ -62,6 +64,7 @@ class SequenceSunBurst extends React.Component {
         .endAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x1))); })
         .innerRadius(function(d) { return Math.max(0, y(d.y0)); })
         .outerRadius(function(d) { return Math.max(0, y(d.y1)); });
+
     // Use d3.text and d3.csv.parseRows so that we do not need to have a header
     // row, and can receive the csv as an array of arrays.
 /*    d3.text("visit-sequences.csv", function(text) {
@@ -87,7 +90,6 @@ class SequenceSunBurst extends React.Component {
           .style("opacity", 0);
 
       // For efficiency, filter nodes to keep only those large enough to see.
-
       var root = d3.hierarchy(window.flare);
       root.sum(function(d) { return d.size; });
 
@@ -110,7 +112,7 @@ class SequenceSunBurst extends React.Component {
             if (d.depth > maxDepth) {
               maxDepth = d.depth;
             }
-            return colors[d.name]; 
+            return colors((d.children ? d : d.parent).data.name); 
           })
           .style("opacity", 1)
           .on("mouseover", mouseover);
@@ -160,10 +162,10 @@ class SequenceSunBurst extends React.Component {
 
       // Then highlight only those that are an ancestor of the current segment.
       vis.selectAll("path")
-          .filter(function(node) {
-                    return (sequenceArray.indexOf(node) >= 0);
-                  })
-          .style("opacity", 1);
+        .filter(function(node) {
+          return (sequenceArray.indexOf(node) >= 0);
+        })
+        .style("opacity", 1);
     }
 
     // Restore everything to full opacity when moving off the visualization.
@@ -181,9 +183,10 @@ class SequenceSunBurst extends React.Component {
           .transition()
           .duration(1000)
           .style("opacity", 1)
-          .each("end", function() {
-                  d3.select(this).on("mouseover", mouseover);
-                });
+          .on("end", function() {
+            d3.select(this).on("mouseover", mouseover);
+            d3.select("#percentage").text("");
+          });
 
       d3.select("#explanation")
           .style("visibility", "hidden");
@@ -227,32 +230,34 @@ class SequenceSunBurst extends React.Component {
       return points.join(" ");
     }
 
+    var context = this;
     // Update the breadcrumb trail to show the current sequence and percentage.
     function updateBreadcrumbs(nodeArray, percentageString) {
-
       // Data join; key function combines name and depth (= position in sequence).
       var g = d3.select("#trail")
           .selectAll("g")
-          .data(nodeArray, function(d) { return d.name + d.depth; });
+          .data(nodeArray, function(d) { 
+            return d.data.name + d.depth; });
 
       // Add breadcrumb and label for entering nodes.
-      var entering = g.enter().append("svg:g");
+      var entering = g.enter().append("g");
 
       entering.append("svg:polygon")
           .attr("points", breadcrumbPoints)
-          .style("fill", function(d) { return colors[d.name]; });
+          .style("fill", function(d) { return colors((d.children ? d : d.parent).data.name); });
 
       entering.append("svg:text")
           .attr("x", (b.w + b.t) / 2)
           .attr("y", b.h / 2)
           .attr("dy", "0.35em")
           .attr("text-anchor", "middle")
-          .text(function(d) { return d.name; });
+          .text(function(d) { return d.data.name; });
 
       // Set position for entering and updating nodes.
-      g.attr("transform", function(d, i) {
-        return "translate(" + i * (b.w + b.s) + ", 0)";
-      });
+      d3.select("#trail")
+          .selectAll("g").attr("transform", function(d, i) {
+            return "translate(" + (d.depth - 1) * (b.w + b.s) + ", 0)";
+          });
 
       // Remove exiting nodes.
       g.exit().remove();
