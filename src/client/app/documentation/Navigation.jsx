@@ -60,6 +60,9 @@ class Navigation extends Component {
                 <Link to="/zoommap" style={linkStyle}>
                   <MenuItem primaryText="Zoomable Map" />
                 </Link>,
+                <Link to="/zoomcountiesmap" style={linkStyle}>
+                  <MenuItem primaryText="Zoomable Counties Map" />
+                </Link>,
                 <Link to="/hierarchical" style={linkStyle}>
                   <MenuItem primaryText="Hierarchical" />
                 </Link>,
