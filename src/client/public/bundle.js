@@ -89,6 +89,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	// import ReactD3 from './ReactD3/ReactD3.jsx';
+	
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
 	
@@ -39173,9 +39175,7 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      var svg = d3.select(".dndTree");
-	      // console.log('svg', svg);
 	      var g = svg.append("g").attr("transform", "translate(40,0)");
-	      //  console.log('g', g);
 	
 	      var height = this.state.height;
 	      var width = this.state.width;
@@ -41418,7 +41418,8 @@
 	            };
 	          });
 	
-	          // var text = transition.selectAll("text");
+	          //filter text to display per zoom is not working :/
+	          var text = transition.selectAll("text");
 	          // console.log('selected text', text);
 	          // text.filter((d) => {
 	          //   console.log('parent', d.parent);

@@ -87,7 +87,8 @@ class CirclePacking extends React.Component {
             return function(t) { zoomTo(i(t)); };
           });
 
-        // var text = transition.selectAll("text");
+        //filter text to display per zoom is not working :/
+        var text = transition.selectAll("text");
         // console.log('selected text', text);
         // text.filter((d) => {
         //   console.log('parent', d.parent);

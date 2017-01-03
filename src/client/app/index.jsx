@@ -8,6 +8,7 @@ import SequenceSunBurst from './sunburst/sequence.jsx';
 import DndTree from './dnd-tree/dndTree.jsx';
 import ZoomableMap from './zoomableMap/zoomableMap.jsx';
 import CirclePacking from './circlePacking/circlePacking.jsx';
+// import ReactD3 from './ReactD3/ReactD3.jsx';
 
 class App extends React.Component {
   render () {
