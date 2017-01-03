@@ -8,7 +8,7 @@ class ZoomMapDoc extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
         <h2>Zoomable Map</h2>
         <ZoomableMap />
       </div>

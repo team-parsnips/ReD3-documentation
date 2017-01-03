@@ -8,7 +8,7 @@ class Main extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
         <h2>Main Page</h2>
       </div>
     )

@@ -37,7 +37,7 @@ class VoronoiDoc extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
         <h2>Voronoi</h2>
         <Divider />
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi. Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque. Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
@@ -53,10 +53,6 @@ class VoronoiDoc extends Component {
           <CardText>
             <Voronoi />
           </CardText>
-          <CardMedia
-            expandable={true}
-            overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}>
-          </CardMedia>
           <CardTitle title="Codepen" subtitle="Card subtitle" expandable={true} />
           <CardText expandable={true}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.

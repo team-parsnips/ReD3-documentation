@@ -8,7 +8,7 @@ class SunburstDoc extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
         <h2>Sunburst</h2>
         <Sunburst />
       </div>

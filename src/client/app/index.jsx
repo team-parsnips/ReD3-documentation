@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {Router, Route, Link, browserHistory} from 'react-router';
+import {match, Router, Route, browserHistory} from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import Main from './documentation/Main.jsx';
