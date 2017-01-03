@@ -8,6 +8,7 @@ import Drawer from 'material-ui/Drawer';
 import Divider from 'material-ui/Divider';
 import MenuItem from 'material-ui/MenuItem';
 import ArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
+import FlatButton from 'material-ui/FlatButton';
 
 const styles = {
   container: { textAlign: 'center', paddingTop: 200
@@ -39,11 +40,16 @@ class Navigation extends Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
           <AppBar
-            onLeftIconButtonTouchTap={this.handleDrawerToggle} />
+            onLeftIconButtonTouchTap={this.handleDrawerToggle}
+            iconElementRight={<FlatButton href="https://github.com/team-parsnips/ReD3" label="GitHub" />} />
           <Drawer
             docked={false}
             open={this.state.open}
             onRequestChange={this.handleClose}>
+            <Link to="/" style={linkStyle}>
+              <MenuItem>ReD3</MenuItem>
+            </Link>
+            <Divider />
             <Link to="/start" style={linkStyle}>
               <MenuItem>Get Started</MenuItem>
             </Link>
@@ -75,7 +81,9 @@ class Navigation extends Component {
               <MenuItem>GitHub</MenuItem>
             </a>
           </Drawer>
-          {this.props.children}
+          <div className="container">
+            {this.props.children}
+          </div>
         </div>
       </MuiThemeProvider>
     )
