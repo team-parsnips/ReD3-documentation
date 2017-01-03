@@ -9,6 +9,7 @@ import Start from './documentation/Start.jsx';
 import VoronoiDoc from './documentation/VoronoiDoc.jsx';
 import SunburstDoc from './documentation/SunburstDoc.jsx';
 import ZoomMapDoc from './documentation/ZoomMapDoc.jsx';
+import ZoomCountiesMapDoc from './documentation/ZoomCountiesMapDoc.jsx';
 import HierarchicalDoc from './documentation/HierarchicalDoc.jsx';
 import DndTreeDoc from './documentation/DndTreeDoc.jsx';
 
@@ -22,6 +23,7 @@ class App extends React.Component {
           <Route path='/voronoi' component={VoronoiDoc}/>
           <Route path='/sunburst' component={SunburstDoc}/>
           <Route path='/zoommap' component={ZoomMapDoc}/>
+          <Route path='/zoomcountiesmap' component={ZoomCountiesMapDoc}/>
           <Route path='/hierarchical' component={HierarchicalDoc}/>
           <Route path='/dndtree' component={DndTreeDoc}/>
         </Route>
