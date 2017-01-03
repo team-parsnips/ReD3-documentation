@@ -5,6 +5,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {deepOrange500} from 'material-ui/styles/colors';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
+import Divider from 'material-ui/Divider';
 import MenuItem from 'material-ui/MenuItem';
 import ArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 
@@ -38,30 +39,40 @@ class Navigation extends Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
           <AppBar
-            title='ReD3'
-            onLeftIconButtonTouchTap={this.handleDrawerToggle}/>
+            onLeftIconButtonTouchTap={this.handleDrawerToggle} />
           <Drawer
             docked={false}
             open={this.state.open}
             onRequestChange={this.handleClose}>
-            <Link to="/" style={linkStyle}>
+            <Link to="/start" style={linkStyle}>
               <MenuItem>Get Started</MenuItem>
             </Link>
             <MenuItem 
               primaryText="Components"
               rightIcon={<ArrowDropDown />} 
               menuItems={[
-                <MenuItem primaryText="Voronoi" />,
-                <MenuItem primaryText="SunBurst" />,
-                <MenuItem primaryText="Zoomable Map" />,
-                <MenuItem primaryText="Hierarchical" />,
-                <MenuItem primaryText="Dnd Tree" />,
+                <Link to="/voronoi" style={linkStyle}>
+                  <MenuItem primaryText="Voronoi" />
+                </Link>,
+                <Link to="/sunburst" style={linkStyle}>
+                  <MenuItem primaryText="SunBurst" />
+                </Link>,
+                <Link to="/zoommap" style={linkStyle}>
+                  <MenuItem primaryText="Zoomable Map" />
+                </Link>,
+                <Link to="/hierarchical" style={linkStyle}>
+                  <MenuItem primaryText="Hierarchical" />
+                </Link>,
+                <Link to="/dndtree" style={linkStyle}>
+                  <MenuItem primaryText="Dnd Tree" />
+                </Link>,
               ]}/>
-            <hr />
-            <Link to="/" style={linkStyle}>
+            <Divider />
+            <a href="https://github.com/team-parsnips/ReD3" style={linkStyle}>
               <MenuItem>GitHub</MenuItem>
-            </Link>
+            </a>
           </Drawer>
+          {this.props.children}
         </div>
       </MuiThemeProvider>
     )
