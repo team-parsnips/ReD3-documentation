@@ -14,15 +14,13 @@ class HierarchicalEdgeBundle extends React.Component {
 
     var cluster = d3.cluster()
         .size([360, innerRadius])
-        //.nodeSize(function(d) { return d.size; });
 
     var bundle = d3.curveBundle();
 
     var line = d3.radialLine()
-/*        .interpolate("bundle")
-        .tension(.85)*/
-        .radius(function(d) { return d.y; })
-        .angle(function(d) { return d.x / 180 * Math.PI; });
+        .angle(d => d.x)
+        .radius(d => d.y)
+        .curve(d3.curveBundle.beta(0.95));
 
     var svg = d3.select("#hierarchical").append("svg")
         .attr("width", diameter)
@@ -33,14 +31,9 @@ class HierarchicalEdgeBundle extends React.Component {
     var link = svg.append("g").selectAll(".link"),
         node = svg.append("g").selectAll(".node");
 
-/*    d3.json("readme-flare-imports.json", function(error, classes) {
-      if (error) throw error;*/
-
       var hierarchy = packageHierarchy(window.flare2);
 
       var hierarchy2 = d3.hierarchy(hierarchy);
-      //hierarchy2.sum(function(d) { return d.size; });
-      console.log('hierarchy native', hierarchy2);
 
       var nodes = cluster(hierarchy2);
       console.log('nodes', nodes);
@@ -48,13 +41,12 @@ class HierarchicalEdgeBundle extends React.Component {
       var links = packageImports(nodes);
       console.log('links', links);
 
-      console.log('bundle', bundle);
       link = link
-          .data(d3.curveBundle(links))
+          .data(links)
         .enter().append("path")
-          .each(function(d) { d.source = d[0], d.target = d[d.length - 1]; })
           .attr("class", "link")
-          .attr("d", line);
+          .attr("d", d => line(d.source.path(d.target)));
+          
 
       node = node
           .data(nodes.descendants().filter(function(n) { return !n.children; }))
@@ -67,7 +59,6 @@ class HierarchicalEdgeBundle extends React.Component {
           .text(function(d) { return d.data.key; })
           .on("mouseover", mouseovered)
           .on("mouseout", mouseouted);
-/*    });*/
 
     function mouseovered(d) {
       node
@@ -122,21 +113,20 @@ class HierarchicalEdgeBundle extends React.Component {
 
     // Return a list of imports for the given array of nodes.
     function packageImports(nodes) {
-      var map = {},
-          imports = [];
-
+      var map = {};
+      var imports = [];
       // Compute a map from name to node.
       nodes.descendants().forEach(function(d) {
-        map[d.name] = d;
+        map[d.data.name] = d;
       });
-
       // For each import, construct a link from the source to target node.
       nodes.descendants().forEach(function(d) {
-        if (d.imports) d.imports.forEach(function(i) {
-          imports.push({source: map[d.name], target: map[i]});
-        });
+        if (d.data.imports) {
+         d.data.imports.forEach((i) => {
+            imports.push({source: map[d.data.name], target: map[i]});
+          });
+        }
       });
-
       return imports;
     }
 
