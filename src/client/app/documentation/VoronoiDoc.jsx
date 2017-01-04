@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Voronoi from '../voronoi/voronoi.jsx';
-import Codepen from 'react-codepen';
+import Codepen from './Codepen.jsx';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn}
@@ -52,12 +52,13 @@ class VoronoiDoc extends Component {
             showExpandableButton={true}
           />
           <CardText>
-            <Voronoi />
           </CardText>
           <CardTitle title="Codepen" subtitle="Card subtitle" expandable={true} />
           <CardText expandable={true}>
-            <Codepen user="Rob0h" hash="YNzVRG" />
           </CardText>
+          <CardMedia expandable={true}>
+            <Codepen user="Rob0h" hash="YNzVRG" />
+          </CardMedia>
         </Card>
 
         <h3>Voronoi Properties</h3>

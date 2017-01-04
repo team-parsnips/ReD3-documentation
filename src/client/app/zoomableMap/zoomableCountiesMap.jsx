@@ -13,10 +13,7 @@ class ZoomableCountiesMap extends React.Component {
       path: null,
       projection: null,
       us: null,
-      options: {
-        // 'polyFill': this.props.polyFill || 'none',
 
-      }
     }
     this.click = this.click.bind(this);
 
@@ -52,7 +49,6 @@ class ZoomableCountiesMap extends React.Component {
       .selectAll('path').data(topojson.feature(us, us.objects.states).features)
       .enter().append('path')
         .attr('d', path)
-        // .attr('id', (d, i) => 'index' + i)
       .on('click', this.click);
 
       g.append('path')
