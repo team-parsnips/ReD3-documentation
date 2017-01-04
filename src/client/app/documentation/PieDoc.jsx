@@ -10,7 +10,7 @@ class PieDoc extends Component {
     return (
       <div>
         <h2>Pie Chart</h2>
-        <Pie group='age' count='population'/>
+        <Pie width={960} height={500} group='age' count='population'/>
       </div>
     )
   }

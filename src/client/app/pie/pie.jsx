@@ -29,7 +29,7 @@ class Pie extends React.Component {
     var pie = d3.pie()
           .value(d => d[context.state.count]);
 
-    var svg = d3.select('body').append('svg')
+    var svg = d3.select('#pie').append('svg')
           .attr('width', this.state.width)
           .attr('height', this.state.height)
         .append('g')
@@ -43,21 +43,22 @@ class Pie extends React.Component {
           .enter().append('g')
             .attr('class', arc);
 
-      console.log('pie data', pie(data));
-
       g.append('path')
             .attr('d', arc)
             .style('fill', d => colors(d.data[context.state.group]));
 
       g.append('text')
-            .text(d => d.data[context.state.group])
-            .attr('transform', d => 'translate(' + labelArc.centroid(d) + ')');
+            .attr('transform', d => 'translate(' + labelArc.centroid(d) + ')')
+            .attr("dy", ".35em")
+            .text(d => d.data[context.state.group]);
+            
+            
     })
   }
 
   render() {
     return (
-      <div>
+      <div id='pie'>
       </div>
     )
   }
