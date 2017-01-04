@@ -52,13 +52,17 @@ class CirclePacking extends React.Component {
         .data(nodes)
         .enter().append("text")
           .attr("class", "label")
+          .style('font', '11px "Helvetica Neue", Helvetica, Arial, sans-serif')
+          .style('text-anchor', 'middle')
+          .style('text-shadow', '0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff')
           .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
           .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
           .text(function(d) { return d.data.name; });
 
-      var node = g.selectAll("circle,text");
+      var node = g.selectAll("circle, text");
 
-      node.style('cursor', 'pointer')
+      g.selectAll("circle")
+        .style('cursor', 'pointer')
         .on('mouseover', function(d) {
           var nodeSelection = d3.select(this)
             .style('stroke', '#000')
@@ -87,28 +91,18 @@ class CirclePacking extends React.Component {
             return function(t) { zoomTo(i(t)); };
           });
 
-        //filter text to display per zoom is not working :/
-        var text = transition.selectAll("text");
-        // console.log('selected text', text);
-        // text.filter((d) => {
-        //   console.log('parent', d.parent);
-        // });
-        // text.filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
-        //   .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
-        //   .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
-        //   .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
+        transition.selectAll("text")
+        .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
+        .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
+        .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
+        .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
       }
 
       function zoomTo(v) {
         var k = diameter / v[2]; view = v;
         node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
         circle.attr("r", function(d) { return d.r * k; });
-      }
-
-      svg.selectAll('.label')
-        .style('font', '11px "Helvetica Neue", Helvetica, Arial, sans-serif')
-        .style('text-anchor', 'middle')
-        .style('text-shadow', '0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff');
+      } 
 
     });
   }
