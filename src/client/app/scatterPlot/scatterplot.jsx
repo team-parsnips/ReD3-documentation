@@ -28,6 +28,8 @@ class ScatterPlot extends React.Component {
     height = svg.attr("height") - margin.top - margin.bottom,
     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
+
     d3.tsv("/tsvData", function(error, data) {
       if (error) throw error;
 
@@ -47,23 +49,33 @@ class ScatterPlot extends React.Component {
           .range([height, 0]);
 
       g.append("g")
-          .attr("transform", "translate(0," + height + ")")
-          .attr("class", "x-axis")
-          .call(d3.axisBottom(x)
-              .ticks(13, "s"))
-          .append("text")
-          .attr("class", "label")
-          .attr("x", width)
-          .attr("y", -6)
-          .style("text-anchor", "end")
-          .text("Sepal Width (cm)");
+        .attr("transform", "translate(0," + height + ")")
+        .attr("class", "x-axis")
+        .call(d3.axisBottom(x)
+            .ticks(13, "s"));
+
+      g.append("text")             
+        .attr("transform",
+              "translate(" + (width/2) + " ," + 
+                             (height + margin.top + 7) + ")")
+        .style("text-anchor", "right")
+        .style('font', '10px sans-serif')
+        .text("Sepal Width (cm)");
 
       g.append("g")
-          .attr("transform", "translate(" + x + ",0)")
-          .attr("class", "y-axis")
-          .call(d3.axisLeft(y)
-              .ticks(9, 's'));
-              // .tickFormat(d3.format(".0s")));
+        .attr("transform", "translate(" + x + ",0)")
+        .attr("class", "y-axis")
+        .call(d3.axisLeft(y)
+            .ticks(9, 's'));
+
+      g.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left)
+        .attr("x",0 - (height / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .style('font', '10px sans-serif')
+        .text("Sepal Length (cm)");     
 
       g.selectAll(".dot")
           .data(data)
@@ -72,7 +84,7 @@ class ScatterPlot extends React.Component {
           .attr("r", 3.5)
           .attr("cx", function(d) { return x(d.sepalWidth); })
           .attr("cy", function(d) { return y(d.sepalLength); })
-          // .style("fill", function(d) { return color(d.species); });
+          .style("fill", function(d) { return color(d.species); });
 
       var legend = svg.selectAll(".legend")
           .data(color.domain())
