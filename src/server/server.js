@@ -48,11 +48,11 @@ function renderPage(appHtml) {
     <!doctype html public="storage">
     <html>
     <meta charset=utf-8/>
-    <title>My First React Router App</title>
-    <link rel=stylesheet href=/index.css>
+    <title>ReD3</title>
+    <link rel="stylesheet" href="./styles.css">
     <div id=app>${appHtml}</div>
-    <script src="/bundle.js"></script>
-   `
+    <script src="./flare.json" charset="utf-8"></script>
+    `
 }
 
 app.use('/', express.static(path.join(__dirname, '../client')));

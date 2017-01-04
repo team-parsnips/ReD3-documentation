@@ -1,17 +1,17 @@
 import React from 'react';
 import {match, Route} from 'react-router';
-import Main from '../documentation/Main';
-import Navigation from '../documentation/Navigation';
-import Start from '../documentation/Start';
-import VoronoiDoc from '../documentation/VoronoiDoc';
-import SunburstDoc from '../documentation/SunburstDoc';
-import ZoomMapDoc from '../documentation/ZoomMapDoc';
-import ZoomCountiesMapDoc from '../documentation/ZoomCountiesMapDoc';
-import HierarchicalDoc from '../documentation/HierarchicalDoc';
-import DndTreeDoc from '../documentation/DndTreeDoc';
-import PieDoc from '../documentation/PieDoc';
-import CirclePackingDoc from '../documentation/CirclePackingDoc';
-import ScatterPlotDoc from '../documentation/ScatterPlotDoc';
+import Main from '../documentation/Main.jsx';
+import Navigation from '../documentation/Navigation.jsx';
+import Start from '../documentation/Start.jsx';
+import VoronoiDoc from '../documentation/VoronoiDoc.jsx';
+import SunburstDoc from '../documentation/SunburstDoc.jsx';
+import ZoomMapDoc from '../documentation/ZoomMapDoc.jsx';
+import ZoomCountiesMapDoc from '../documentation/ZoomCountiesMapDoc.jsx';
+import HierarchicalDoc from '../documentation/HierarchicalDoc.jsx';
+import DndTreeDoc from '../documentation/DndTreeDoc.jsx';
+import PieDoc from '../documentation/PieDoc.jsx';
+import CirclePackingDoc from '../documentation/CirclePackingDoc.jsx';
+import ScatterPlotDoc from '../documentation/ScatterPlotDoc.jsx';
 
 module.exports = (
   <Route component={Navigation}>
