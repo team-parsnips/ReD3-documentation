@@ -78,6 +78,12 @@ class Navigation extends Component {
                 <Link to="/pie" style={linkStyle}>
                   <MenuItem primaryText="Pie Chart" />
                 </Link>,
+                <Link to="/circlepacking" style={linkStyle}>
+                  <MenuItem primaryText="Zoomable Circle Packing" />
+                </Link>,
+                <Link to="/scatterplot" style={linkStyle}>
+                  <MenuItem primaryText="Scatter Plot" />
+                </Link>,
               ]}/>
             <Divider />
             <a href="https://github.com/team-parsnips/ReD3" style={linkStyle}>
