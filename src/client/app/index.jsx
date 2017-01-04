@@ -13,6 +13,7 @@ import ZoomMapDoc from './documentation/ZoomMapDoc.jsx';
 import ZoomCountiesMapDoc from './documentation/ZoomCountiesMapDoc.jsx';
 import HierarchicalDoc from './documentation/HierarchicalDoc.jsx';
 import DndTreeDoc from './documentation/DndTreeDoc.jsx';
+import PieDoc from './documentation/PieDoc.jsx';
 
 class App extends React.Component {
   render () {
@@ -27,6 +28,7 @@ class App extends React.Component {
           <Route path='/zoomcountiesmap' component={ZoomCountiesMapDoc}/>
           <Route path='/hierarchical' component={HierarchicalDoc}/>
           <Route path='/dndtree' component={DndTreeDoc}/>
+          <Route path='/pie' component={PieDoc}/>
         </Route>
       </Router>
     );

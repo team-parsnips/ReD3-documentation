@@ -75,6 +75,9 @@ class Navigation extends Component {
                 <Link to="/dndtree" style={linkStyle}>
                   <MenuItem primaryText="Dnd Tree" />
                 </Link>,
+                <Link to="/pie" style={linkStyle}>
+                  <MenuItem primaryText="Pie Chart" />
+                </Link>,
               ]}/>
             <Divider />
             <a href="https://github.com/team-parsnips/ReD3" style={linkStyle}>

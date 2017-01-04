@@ -18,6 +18,10 @@ app.get('/tsvData', function (req, res) {
   res.sendFile('data.tsv', {root: __dirname});
 });
 
+app.get('/csvData', function (req, res) {
+  res.sendFile('data.csv', {root: __dirname});
+});
+
 app.get('/', function (req, res) {
   res.sendFile('index.html', {root: path.join(__dirname, '../client')});
 });
