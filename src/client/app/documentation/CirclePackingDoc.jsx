@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import CirclePacking from '../circlePacking/circlePacking.jsx';
 
-class CirclePacking extends Component {
+class CirclePackingDoc extends Component {
   constructor() {
     super();
   }
