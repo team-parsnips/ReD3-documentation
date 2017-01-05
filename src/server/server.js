@@ -22,6 +22,10 @@ app.get('/csvData', function (req, res) {
   res.sendFile('data.csv', {root: __dirname});
 });
 
+app.get('/ReD3-logo.png', function (req, res) {
+  res.sendFile('ReD3-logo.png', {root: __dirname});
+});
+
 app.use('/', express.static(path.join(__dirname, '../client')));
 app.use('/public', express.static(path.join(__dirname, '../client/public')));
 
