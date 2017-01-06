@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router';
 import {Card, CardMedia, CardText, CardHeader} from 'material-ui/Card';
+
 
 const styles = {
   container: {
@@ -25,7 +27,8 @@ const styles = {
   smallContainer: {
     width: '33%',
     height: '300px',
-    float: 'left'
+    float: 'left',
+    background: '#FAFAFA'
   },
 
   costumCard: {
@@ -59,13 +62,16 @@ class Main extends Component {
           </Card>
         </div>
         <div style={styles.div}>
-          <Card style={styles.smallContainer}>
-            <CardHeader
-              title="Getting Started" />
-           <CardMedia mediaStyle={styles.logo}>
-             <img src="./getting-started.png" />
-           </CardMedia>
-          </Card>
+          <Link to="/start">
+            <Card style={styles.smallContainer}>
+              <CardHeader
+                title="Getting Started"
+                style={styles.cardHeader} />
+             <CardMedia mediaStyle={styles.logo}>
+               <img src="./getting-started.png" />
+             </CardMedia>
+            </Card>
+          </Link>
           <Card style={styles.smallContainer}>
             <CardHeader
               title="Costumization" />
@@ -73,13 +79,15 @@ class Main extends Component {
              <img src="./costumization.png" />
            </CardMedia>
           </Card>
-          <Card style={styles.smallContainer}>
-            <CardHeader
-              title="Components" />
-           <CardMedia mediaStyle={styles.logo}>
-             <img src="./components.png" />
-           </CardMedia>
-          </Card>
+          <Link to="/stackedgroupedbar">
+            <Card style={styles.smallContainer}>
+              <CardHeader
+                title="Components" />
+             <CardMedia mediaStyle={styles.logo}>
+               <img src="./components.png" />
+             </CardMedia>
+            </Card>
+          </Link>
         </div>
       </div>
     )
