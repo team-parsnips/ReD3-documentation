@@ -29,10 +29,6 @@ class CirclePackingDoc extends Component {
     super();
   }
 
-  handleExpandChange = (expanded) => {
-    this.setState({expanded: expanded});
-  };
-
   render() {
     return (
       <div>
@@ -40,7 +36,7 @@ class CirclePackingDoc extends Component {
         <Divider />
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi. Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque. Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
         </p>
-        
+
         <Card>
           <CardHeader
             title="Example Zoomable Circle Packing"
