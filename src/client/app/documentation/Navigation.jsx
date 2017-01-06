@@ -66,6 +66,9 @@ class Navigation extends Component {
                 <Link to="/sunburst" style={linkStyle}>
                   <MenuItem primaryText="SunBurst" />
                 </Link>,
+                <Link to="/sequence" style={linkStyle}>
+                  <MenuItem primaryText="Sequence SunBurst" />
+                </Link>,
                 <Link to="/zoommap" style={linkStyle}>
                   <MenuItem primaryText="Zoomable Map" />
                 </Link>,

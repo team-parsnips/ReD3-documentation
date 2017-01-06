@@ -6,6 +6,7 @@ import Start from '../documentation/Start.jsx';
 import StackedBarDoc from '../documentation/StackedBarDoc.jsx';
 import VoronoiDoc from '../documentation/VoronoiDoc.jsx';
 import SunburstDoc from '../documentation/SunburstDoc.jsx';
+import SequenceDoc from '../documentation/SequenceDoc.jsx';
 import ZoomMapDoc from '../documentation/ZoomMapDoc.jsx';
 import ZoomCountiesMapDoc from '../documentation/ZoomCountiesMapDoc.jsx';
 import HierarchicalDoc from '../documentation/HierarchicalDoc.jsx';
@@ -21,6 +22,7 @@ module.exports = (
     <Route path='/stackedgroupedbar' component={StackedBarDoc}/>
     <Route path='/voronoi' component={VoronoiDoc}/>
     <Route path='/sunburst' component={SunburstDoc}/>
+    <Route path='/sequence' component={SequenceDoc}/>
     <Route path='/zoommap' component={ZoomMapDoc}/>
     <Route path='/zoomcountiesmap' component={ZoomCountiesMapDoc}/>
     <Route path='/hierarchical' component={HierarchicalDoc}/>
