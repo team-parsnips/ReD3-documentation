@@ -11,8 +11,7 @@ import ArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import FlatButton from 'material-ui/FlatButton';
 
 const styles = {
-  container: { textAlign: 'center', paddingTop: 200
-  }
+  container: { textAlign: 'center'}
 };
 
 const muiTheme = getMuiTheme({
@@ -22,6 +21,10 @@ const muiTheme = getMuiTheme({
 const linkStyle = {
   color:'white',
   'textDecoration':'none'
+};
+
+const appBarStyle = {
+  background: '#006064'
 };
 
 class Navigation extends Component {
@@ -41,7 +44,9 @@ class Navigation extends Component {
         <div>
           <AppBar
             onLeftIconButtonTouchTap={this.handleDrawerToggle}
-            iconElementRight={<FlatButton href="https://github.com/team-parsnips/ReD3" label="GitHub" />} />
+            iconElementRight={<FlatButton href="https://github.com/team-parsnips/ReD3" label="GitHub" />}
+            style={appBarStyle}
+            title='ReD3' />
           <Drawer
             docked={false}
             open={this.state.open}
@@ -96,7 +101,7 @@ class Navigation extends Component {
               <MenuItem>GitHub</MenuItem>
             </a>
           </Drawer>
-          <div className="container">
+          <div>
             {this.props.children}
           </div>
         </div>
