@@ -47,16 +47,8 @@ class VoronoiDoc extends Component {
         <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
           <CardHeader
             title="Example Voronoi"
-            subtitle="Subtitle"
-            actAsExpander={true}
-            showExpandableButton={true}
-          />
-          <CardText>
-          </CardText>
-          <CardTitle title="Codepen" subtitle="Card subtitle" expandable={true} />
-          <CardText expandable={true}>
-          </CardText>
-          <CardMedia expandable={true}>
+            subtitle="Subtitle"/>
+          <CardMedia>
             <Codepen user="Rob0h" hash="YNzVRG" />
           </CardMedia>
         </Card>
