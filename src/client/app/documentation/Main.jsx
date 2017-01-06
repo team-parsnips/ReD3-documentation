@@ -5,7 +5,7 @@ const styles = {
   container: {
     width: '100%',
     height: '500px',
-    background: '#006064',
+    background: 'linear-gradient(#006064, #607D8B)',
     display: 'flex',
     'justify-content': 'center',
     'align-items': 'center'
