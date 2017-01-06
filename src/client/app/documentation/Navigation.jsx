@@ -45,7 +45,8 @@ class Navigation extends Component {
           <AppBar
             onLeftIconButtonTouchTap={this.handleDrawerToggle}
             iconElementRight={<FlatButton href="https://github.com/team-parsnips/ReD3" label="GitHub" />}
-            style={appBarStyle} />
+            style={appBarStyle}
+            title='ReD3' />
           <Drawer
             docked={false}
             open={this.state.open}

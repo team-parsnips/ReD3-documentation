@@ -26,6 +26,18 @@ app.get('/ReD3-logo.png', function (req, res) {
   res.sendFile('ReD3-logo2.png', {root: __dirname});
 });
 
+app.get('/getting-started.png', function (req, res) {
+  res.sendFile('getting-started.png', {root: __dirname});
+});
+
+app.get('/costumization.png', function (req, res) {
+  res.sendFile('costumization.png', {root: __dirname});
+});
+
+app.get('/components.png', function (req, res) {
+  res.sendFile('components.png', {root: __dirname});
+});
+
 app.use('/', express.static(path.join(__dirname, '../client')));
 app.use('/public', express.static(path.join(__dirname, '../client/public')));
 
