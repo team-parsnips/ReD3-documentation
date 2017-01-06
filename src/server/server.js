@@ -23,7 +23,7 @@ app.get('/csvData', function (req, res) {
 });
 
 app.get('/ReD3-logo.png', function (req, res) {
-  res.sendFile('ReD3-logo.png', {root: __dirname});
+  res.sendFile('ReD3-logo2.png', {root: __dirname});
 });
 
 app.use('/', express.static(path.join(__dirname, '../client')));
