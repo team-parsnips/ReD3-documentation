@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Sunburst from '../sunburst/sunburst.jsx';
+import StackedGroupedBar from '../barchart/stackedgroupedbar.jsx';
 import Codepen from './Codepen.jsx';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
@@ -24,7 +24,7 @@ const propTable = [
   },
 ]
 
-class SunburstDoc extends Component {
+class StackedBarDoc extends Component {
   constructor() {
     super();
   }
@@ -32,21 +32,21 @@ class SunburstDoc extends Component {
   render() {
     return (
       <div>
-        <h2>Sunburst</h2>
+        <h2>Stacked & Grouped Bar Chart</h2>
         <Divider />
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi. Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque. Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
         </p>
 
         <Card>
           <CardHeader
-            title="Example Sunburst"
+            title="Example Stacked & Grouped Bar Chart"
             subtitle="Subtitle"/>
           <CardMedia>
-            <Sunburst />
+            <StackedGroupedBar />
           </CardMedia>
         </Card>
         
-        <h3>Sunburst Properties</h3>
+        <h3>Stacked & Grouped Bar Chart Properties</h3>
         <Table>
           <TableHeader displaySelectAll= {false} adjustForCheckbox = {false} >
             <TableRow>
@@ -72,4 +72,4 @@ class SunburstDoc extends Component {
   }
 }
 
-export default SunburstDoc;
+export default StackedBarDoc;
