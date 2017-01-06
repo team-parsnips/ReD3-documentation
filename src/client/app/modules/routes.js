@@ -3,6 +3,7 @@ import {match, Route} from 'react-router';
 import Main from '../documentation/Main.jsx';
 import Navigation from '../documentation/Navigation.jsx';
 import Start from '../documentation/Start.jsx';
+import StackedBarDoc from '../documentation/StackedBarDoc.jsx';
 import VoronoiDoc from '../documentation/VoronoiDoc.jsx';
 import SunburstDoc from '../documentation/SunburstDoc.jsx';
 import ZoomMapDoc from '../documentation/ZoomMapDoc.jsx';
@@ -17,6 +18,7 @@ module.exports = (
   <Route component={Navigation}>
     <Route path='/' component={Main}/>
     <Route path='/start' component={Start}/>
+    <Route path='/stackedgroupedbar' component={StackedBarDoc}/>
     <Route path='/voronoi' component={VoronoiDoc}/>
     <Route path='/sunburst' component={SunburstDoc}/>
     <Route path='/zoommap' component={ZoomMapDoc}/>

@@ -57,6 +57,9 @@ class Navigation extends Component {
               primaryText="Components"
               rightIcon={<ArrowDropDown />} 
               menuItems={[
+                <Link to="/stackedgroupedbar" style={linkStyle}>
+                  <MenuItem primaryText="Stacked & Grouped Bar Chart" />
+                </Link>,
                 <Link to="/voronoi" style={linkStyle}>
                   <MenuItem primaryText="Voronoi" />
                 </Link>,
