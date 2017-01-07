@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ScatterPlot from '../scatterPlot/scatterPlot.jsx';
+import ScatterPlot from '../scatterPlot/scatterplot.jsx';
 import Codepen from './Codepen.jsx';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';

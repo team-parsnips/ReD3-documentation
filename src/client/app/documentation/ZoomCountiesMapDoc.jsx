@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ZoomableCountiesMap from '../ZoomableMap/zoomableCountiesMap.jsx';
+import ZoomableCountiesMap from '../zoomableMap/zoomableCountiesMap.jsx';
 import Codepen from './Codepen.jsx';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
