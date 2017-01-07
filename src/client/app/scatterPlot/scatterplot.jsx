@@ -31,6 +31,7 @@ class ScatterPlot extends React.Component {
     var color = d3.scaleOrdinal(d3.schemeCategory10);
 
     d3.tsv("/tsvData", function(error, data) {
+      console.log(data);
       if (error) throw error;
 
       data.forEach(function(d) {
