@@ -1,6 +1,9 @@
 var express = require('express')
 var app = express()
 var path = require('path');
+var cors = require('cors');
+
+app.use(cors());
 
 app.get('/data', function (req, res) {
   res.sendFile('sampleData.csv', {root: __dirname});
