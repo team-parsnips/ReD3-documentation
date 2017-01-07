@@ -39,4 +39,3 @@ jspm_packages
 
 # WebPack Build
 src/client/public/*
-server/*

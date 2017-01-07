@@ -68,7 +68,7 @@ class Main extends Component {
                 title="Getting Started"
                 style={styles.cardHeader} />
              <CardMedia mediaStyle={styles.logo}>
-               <img src="./getting-started.png" />
+               <img src="/getting-started.png" />
              </CardMedia>
             </Card>
           </Link>
@@ -76,7 +76,7 @@ class Main extends Component {
             <CardHeader
               title="Costumization" />
            <CardMedia mediaStyle={styles.costumCard}>
-             <img src="./costumization.png" />
+             <img src="/costumization.png" />
            </CardMedia>
           </Card>
           <Link to="/stackedgroupedbar">
@@ -84,7 +84,7 @@ class Main extends Component {
               <CardHeader
                 title="Components" />
              <CardMedia mediaStyle={styles.logo}>
-               <img src="./components.png" />
+               <img src="/components.png" />
              </CardMedia>
             </Card>
           </Link>
