@@ -38,11 +38,11 @@ app.get('/components.png', function (req, res) {
   res.sendFile('components.png', {root: __dirname});
 });
 
-app.use('/', express.static(path.join(__dirname, '../client')));
-app.use('/public', express.static(path.join(__dirname, '../client/public')));
+app.use('/', express.static(path.join(__dirname, '../src/client')));
+app.use('/public', express.static(path.join(__dirname, '../src/client/public')));
 
 app.get('/*', function(req, res) {
-  res.sendFile('index.html', {root: path.join(__dirname, '../client')});
+  res.sendFile('index.html', {root: path.join(__dirname, '../src/client')});
 });
 
 
