@@ -74,7 +74,7 @@ class Main extends Component {
           </Link>
           <Card style={styles.smallContainer}>
             <CardHeader
-              title="Costumization" />
+              title="Customization" />
            <CardMedia mediaStyle={styles.costumCard}>
              <img src="/costumization.png" />
            </CardMedia>
