@@ -42,7 +42,7 @@ class StackedBarDoc extends Component {
             title="Example Stacked & Grouped Bar Chart"
             subtitle="Subtitle"/>
           <CardMedia>
-            <StackedGroupedBar />
+            <Codepen user="Rob0h" hash="KapxYV" />
           </CardMedia>
         </Card>
         

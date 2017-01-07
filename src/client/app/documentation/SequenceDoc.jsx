@@ -42,7 +42,7 @@ class SequenceDoc extends Component {
             title="Example Sequence Sunburst"
             subtitle="Subtitle"/>
           <CardMedia>
-            <SequenceSunBurst />
+            <Codepen user="Rob0h" hash="oBXaza" />
           </CardMedia>
         </Card>
         

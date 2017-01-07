@@ -42,7 +42,7 @@ class ScatterPlotDoc extends Component {
             title="Example Scatter Plot"
             subtitle="Subtitle"/>
           <CardMedia>
-            <ScatterPlot />
+            <Codepen user="Rob0h" hash="mRJQwO" />
           </CardMedia>
         </Card>
 

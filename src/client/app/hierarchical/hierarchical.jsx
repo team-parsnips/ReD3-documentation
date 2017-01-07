@@ -31,7 +31,10 @@ class HierarchicalEdgeBundle extends React.Component {
     var link = svg.append("g").selectAll(".link"),
         node = svg.append("g").selectAll(".node");
 
-      var hierarchy = packageHierarchy(window.flare2);
+    d3.json('/hierarchicaldata', function(err, root) {
+      if (err) throw err;
+
+      var hierarchy = packageHierarchy(root);
 
       var hierarchy2 = d3.hierarchy(hierarchy);
 
@@ -59,6 +62,7 @@ class HierarchicalEdgeBundle extends React.Component {
           .text(function(d) { return d.data.key; })
           .on("mouseover", mouseovered)
           .on("mouseout", mouseouted);
+    });
 
     function mouseovered(d) {
       node

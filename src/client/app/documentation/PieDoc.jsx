@@ -42,7 +42,7 @@ class PieDoc extends Component {
             title="Example Pie Chart"
             subtitle="Subtitle"/>
           <CardMedia>
-            <Pie width={960} height={500} group='age' count='population'/>
+            <Codepen user="Rob0h" hash="jyPQyz" />
           </CardMedia>
         </Card>
         

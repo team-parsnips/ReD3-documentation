@@ -42,7 +42,7 @@ class HierarchicalDoc extends Component {
             title="Example Hierarchical Edge Bundle"
             subtitle="Subtitle"/>
           <CardMedia>
-            <HierarchicalEdgeBundle />
+            <Codepen user="Rob0h" hash="dNoQpo" />
           </CardMedia>
         </Card>
 

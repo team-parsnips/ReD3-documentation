@@ -33,77 +33,80 @@ class SunBurst extends React.Component {
         .innerRadius(function(d) { return Math.max(0, y(d.y0)); })
         .outerRadius(function(d) { return Math.max(0, y(d.y1)); });
 
-    var root = d3.hierarchy(window.flare);
-    root.sum(function(d) { return d.size; });
+    d3.json("/flare", function(error, root) {
+      if (error) throw error;
 
-    var g = svg.selectAll("g")
-        .data(partition(root).descendants())
-      .enter().append("g");
+      var root = d3.hierarchy(root);
+      root.sum(function(d) { return d.size; });
 
-    var path = g.append("path")
-      .attr("d", arc)
-      .style("fill", function(d) { return color((d.children ? d : d.parent).data.name); })
-      .on("click", click);
+      var g = svg.selectAll("g")
+          .data(partition(root).descendants())
+        .enter().append("g");
 
-    var text = g.append("text")
-      .attr("transform", function(d) { return "rotate(" + computeTextRotation(d) + ")"; })
-      .attr("x", function(d) { return y(d.y0); })
-      .attr("dx", "6") // margin
-      .attr("dy", ".35em") // vertical-align
-      .text(function(d) { return d.data.name; });
+      var path = g.append("path")
+        .attr("d", arc)
+        .style("fill", function(d) { return color((d.children ? d : d.parent).data.name); })
+        .on("click", click);
 
-      // NOT WORKING
-/*    d3.selectAll("input").on("change", function change() {
-      var value = this.value === "count"
-          ? function() { return 1; }
-          : function(d) { return d.size; };
+      var text = g.append("text")
+        .attr("transform", function(d) { return "rotate(" + computeTextRotation(d) + ")"; })
+        .attr("x", function(d) { return y(d.y0); })
+        .attr("dx", "6") // margin
+        .attr("dy", ".35em") // vertical-align
+        .text(function(d) { return d.data.name; });
 
-      path
-          .data(partition.value(value).nodes)
-        .transition()
-          .duration(1000)
-          .attrTween("d", arcTweenData);
-    });*/
+        // NOT WORKING
+  /*    d3.selectAll("input").on("change", function change() {
+        var value = this.value === "count"
+            ? function() { return 1; }
+            : function(d) { return d.size; };
 
-    function computeTextRotation(d) {
-      var dx = d.x1 - d.x0;
-      return (x(d.x0 + dx / 2) - Math.PI / 2) / Math.PI * 180;
-    }
+        path
+            .data(partition.value(value).nodes)
+          .transition()
+            .duration(1000)
+            .attrTween("d", arcTweenData);
+      });*/
 
-    function click(d) {
-      // fade out all text elements
-      text.transition().attr("opacity", 0);
-
-      function arcTween(d) {
-        var xd = d3.interpolate(x.domain(), [d.x0, d.x1]),
-            yd = d3.interpolate(y.domain(), [d.y0, 1]),
-            yr = d3.interpolate(y.range(), [d.y0 ? 20 : 0, radius]);
-        return function(d, i) {
-          return i
-              ? function(t) { return arc(d); }
-              : function(t) { x.domain(xd(t)); y.domain(yd(t)).range(yr(t)); return arc(d); };
-        };
+      function computeTextRotation(d) {
+        var dx = d.x1 - d.x0;
+        return (x(d.x0 + dx / 2) - Math.PI / 2) / Math.PI * 180;
       }
 
-      path.transition()
-      .duration(750)
-      .attrTween("d", arcTween(d))
-      .on("end", function(e, i) {
-          // check if the animated element's data e lies within the visible angle span given in d
-          var dx = d.x1 - d.x0;
-          if (e.x0 >= d.x0 && e.x0 < (d.x0 + dx)) {
-            // get a selection of the associated text element
-            var arcText = d3.select(this.parentNode).select("text");
-            // fade in the text element and recalculate positions
-            arcText.transition().duration(750)
-              .attr("opacity", 1)
-              .attr("transform", function() { return "rotate(" + computeTextRotation(e) + ")" })
-              .attr("x", function(d) { return y(d.y0); });
-          }
-      });
+      function click(d) {
+        // fade out all text elements
+        text.transition().attr("opacity", 0);
 
+        function arcTween(d) {
+          var xd = d3.interpolate(x.domain(), [d.x0, d.x1]),
+              yd = d3.interpolate(y.domain(), [d.y0, 1]),
+              yr = d3.interpolate(y.range(), [d.y0 ? 20 : 0, radius]);
+          return function(d, i) {
+            return i
+                ? function(t) { return arc(d); }
+                : function(t) { x.domain(xd(t)); y.domain(yd(t)).range(yr(t)); return arc(d); };
+          };
+        }
 
-    }
+        path.transition()
+        .duration(750)
+        .attrTween("d", arcTween(d))
+        .on("end", function(e, i) {
+            // check if the animated element's data e lies within the visible angle span given in d
+            var dx = d.x1 - d.x0;
+            if (e.x0 >= d.x0 && e.x0 < (d.x0 + dx)) {
+              // get a selection of the associated text element
+              var arcText = d3.select(this.parentNode).select("text");
+              // fade in the text element and recalculate positions
+              arcText.transition().duration(750)
+                .attr("opacity", 1)
+                .attr("transform", function() { return "rotate(" + computeTextRotation(e) + ")" })
+                .attr("x", function(d) { return y(d.y0); });
+            }
+        });
+      }
+
+    });
   }
   render() {
     return (

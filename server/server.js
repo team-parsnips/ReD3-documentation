@@ -5,6 +5,10 @@ var cors = require('cors');
 
 app.use(cors());
 
+app.get('/hierarchicaldata', function (req, res) {
+  res.sendFile('hierarchical.json', {root: __dirname});
+});
+
 app.get('/data', function (req, res) {
   res.sendFile('sampleData.csv', {root: __dirname});
 });
