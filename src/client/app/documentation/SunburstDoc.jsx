@@ -42,7 +42,7 @@ class SunburstDoc extends Component {
             title="Example Sunburst"
             subtitle="Subtitle"/>
           <CardMedia>
-            <Sunburst />
+            <Codepen user="Rob0h" hash="wgaYww" />
           </CardMedia>
         </Card>
         

@@ -42,7 +42,7 @@ class ZoomCountiesMapDoc extends Component {
             title="Example Zoomable Counties Map"
             subtitle="Subtitle"/>
           <CardMedia>
-            <ZoomableCountiesMap />
+            <Codepen user="Rob0h" hash="jyPeyM" />
           </CardMedia>
         </Card>
 

@@ -72,8 +72,10 @@ class SequenceSunBurst extends React.Component {
       var json = buildHierarchy(csv);
       createVisualization(json);
     });*/
-
-    createVisualization(window.flare);
+    d3.json("/flare", function(error, root) {
+      if (error) throw error;
+      createVisualization(root);
+    });
 
     // Main function to draw and set up the visualization, once we have the data.
     function createVisualization(json) {
@@ -90,7 +92,8 @@ class SequenceSunBurst extends React.Component {
           .style("opacity", 0);
 
       // For efficiency, filter nodes to keep only those large enough to see.
-      var root = d3.hierarchy(window.flare);
+
+      var root = d3.hierarchy(json);
       root.sum(function(d) { return d.size; });
 
       var nodes = partition(root).descendants()

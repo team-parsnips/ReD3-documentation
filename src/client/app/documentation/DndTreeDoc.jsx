@@ -42,7 +42,7 @@ class DndTreeDoc extends Component {
             title="Example Drag 'n Drop Tree"
             subtitle="Subtitle"/>
           <CardMedia>
-            <DndTree />
+            <Codepen user="Rob0h" hash="ZLGmBq" />
           </CardMedia>
         </Card>
 

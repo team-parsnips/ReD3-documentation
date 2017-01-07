@@ -81,7 +81,7 @@ class Navigation extends Component {
                   <MenuItem primaryText="Zoomable Counties Map" />
                 </Link>,
                 <Link to="/hierarchical" style={linkStyle}>
-                  <MenuItem primaryText="Hierarchical" />
+                  <MenuItem primaryText="Hierarchical Edge Bundle" />
                 </Link>,
                 <Link to="/dndtree" style={linkStyle}>
                   <MenuItem primaryText="Dnd Tree" />
