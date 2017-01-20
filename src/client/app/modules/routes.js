@@ -3,6 +3,7 @@ import {match, Route} from 'react-router';
 import Main from '../documentation/Main.jsx';
 import Navigation from '../documentation/Navigation.jsx';
 import Start from '../documentation/Start.jsx';
+import About from '../documentation/About.jsx';
 import StackedBarDoc from '../documentation/StackedBarDoc.jsx';
 import VoronoiDoc from '../documentation/VoronoiDoc.jsx';
 import SunburstDoc from '../documentation/SunburstDoc.jsx';
@@ -15,10 +16,12 @@ import PieDoc from '../documentation/PieDoc.jsx';
 import CirclePackingDoc from '../documentation/CirclePackingDoc.jsx';
 import ScatterPlotDoc from '../documentation/ScatterPlotDoc.jsx';
 
+
 module.exports = (
   <Route component={Navigation}>
     <Route path='/' component={Main}/>
     <Route path='/start' component={Start}/>
+    <Route path='/about' component={About}/>
     <Route path='/stackedgroupedbar' component={StackedBarDoc}/>
     <Route path='/voronoi' component={VoronoiDoc}/>
     <Route path='/sunburst' component={SunburstDoc}/>

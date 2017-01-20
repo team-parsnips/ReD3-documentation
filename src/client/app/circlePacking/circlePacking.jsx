@@ -6,96 +6,100 @@ class CirclePacking extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      width: 960,
-      height: 960,
-      options: {
-        // styles here!
-      }
-    }
+    this.state = {};
   }
 
   componentDidMount() {
-    var svg = d3.select(".circle-packing"),
-    margin = 20,
-    diameter = +svg.attr("width"),
-    g = svg.append("g").attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
+    var height, width, svg, margin, diameter, g, color, pack;
 
-    var color = d3.scaleLinear()
-        .domain([-1, 5])
-        .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
-        .interpolate(d3.interpolateHcl);
+    height   = +this.props.height;
 
-    var pack = d3.pack()
-        .size([diameter - margin, diameter - margin])
-        .padding(2);
+    width    = +this.props.width;
 
-    d3.json("/flare", function(error, root) {
-      if (error) throw error;
+    svg      = d3.select(".circle-packing")
+                .attr('height', height)
+                .attr('width', width);
 
-      root = d3.hierarchy(root)
-          .sum(function(d) { return d.size; })
-          .sort(function(a, b) { return b.value - a.value; });
+    margin   = 20;
 
-      var focus = root,
-          nodes = pack(root).descendants(),
-          view;
+    diameter = +svg.attr("width");
 
-      var circle = g.selectAll("circle")
-        .data(nodes)
-        .enter().append("circle")
-          .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
-          .style("fill", function(d) { return d.children ? color(d.depth) : 'white'; })
-          .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
+    g        = svg.append("g").attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-      var text = g.selectAll("text")
-        .data(nodes)
-        .enter().append("text")
-          .attr("class", "label")
-          .style('font', '11px "Helvetica Neue", Helvetica, Arial, sans-serif')
-          .style('text-anchor', 'middle')
-          .style('text-shadow', '0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff')
-          .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
-          .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
-          .text(function(d) { return d.data.name; });
+    color    = d3.scaleLinear()
+              .domain([-1, 5])
+              .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
+              .interpolate(d3.interpolateHcl);
 
-      var node = g.selectAll("circle, text");
+    pack     = d3.pack()
+              .size([diameter - margin, diameter - margin])
+              .padding(2);
+
+    function genCirclePacking(root) {
+
+      var focus, nodes, view, circle, text, node;
+
+      root   = d3.hierarchy(root)
+                .sum(function(d) { return d.size; })
+                .sort(function(a, b) { return b.value - a.value; });
+
+      focus  = root;
+      nodes  = pack(root).descendants();
+
+      circle = g.selectAll("circle")
+                .data(nodes)
+                .enter().append("circle")
+                  .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
+                .style("fill", function(d) { return d.children ? color(d.depth) : 'white'; })
+                .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
+
+      text   = g.selectAll("text")
+                .data(nodes)
+                .enter().append("text")
+                  .attr("class", "label")
+                .style('font', '11px "Helvetica Neue", Helvetica, Arial, sans-serif')
+                .style('text-anchor', 'middle')
+                .style('text-shadow', '0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff')
+                .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
+                .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
+                .text(function(d) { return d.data.name; });
+
+      node   = g.selectAll("circle, text");
 
       g.selectAll("circle")
-        .style('cursor', 'pointer')
-        .on('mouseover', function(d) {
-          var nodeSelection = d3.select(this)
-            .style('stroke', '#000')
-            .style('stroke-width', '1.5px')
-        })
-        .on('mouseout', function(d) {
-          var nodeSelection = d3.select(this)
-            .style('stroke', '#000')
-            .style('stroke-width', '0px')
-        });
+              .style('cursor', 'pointer')
+              .on('mouseover', function(d) {
+                var nodeSelection = d3.select(this)
+                  .style('stroke', '#000')
+                  .style('stroke-width', '1.5px')
+              })
+              .on('mouseout', function(d) {
+                var nodeSelection = d3.select(this)
+                  .style('stroke', '#000')
+                  .style('stroke-width', '0px')
+              });
 
-      svg
-        .style("background", color(-1))
-        .on("click", function() { zoom(root); });
+      svg.style("background", color(-1))
+              .on("click", function() { zoom(root); });
 
       zoomTo([root.x, root.y, root.r * 2 + margin]);
 
       function zoom(d) {
         var focus0 = focus;
-        focus = d;
+        focus      = d;
 
         var transition = d3.transition()
-          .duration(d3.event.altKey ? 7500 : 750)
-          .tween("zoom", function(d) {
-            var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
-            return function(t) { zoomTo(i(t)); };
-          });
+                    .duration(d3.event.altKey ? 7500 : 750)
+                    .tween("zoom", function(d) {
+                      var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
+                      return function(t) { zoomTo(i(t)); };
+                    });
 
         transition.selectAll("text")
-        .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
-        .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
-        .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
-        .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
+                    .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
+                    .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
+                    .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
+                    .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
       }
 
       function zoomTo(v) {
@@ -104,15 +108,14 @@ class CirclePacking extends React.Component {
         circle.attr("r", function(d) { return d.r * k; });
       } 
 
-    });
+    }
+    genCirclePacking(this.props.data);
   }
 
   render() {
     return (
       <div>
         <svg
-        width={this.state.width}
-        height={this.state.height}
         className='circle-packing'>
         </svg>
       </div>

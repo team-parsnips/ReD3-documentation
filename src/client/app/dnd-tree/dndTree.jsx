@@ -26,7 +26,9 @@ class DndTree extends React.Component {
 
     var stratify = d3.stratify()
     .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
+
     return d3.csv("/data", (error, data) => {
+      console.log('data', JSON.stringify(data));
       if (error) throw error;
 
       var root = stratify(data)

@@ -8,6 +8,7 @@ import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow,
 import Divider from 'material-ui/Divider';
 import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
+// <Codepen user="Rob0h" hash="JEozrY" />
 
 const propTable = [
   {
@@ -27,6 +28,7 @@ const propTable = [
 class CirclePackingDoc extends Component {
   constructor() {
     super();
+    this.state = {data: window.flare}
   }
 
   render() {
@@ -42,7 +44,11 @@ class CirclePackingDoc extends Component {
             title="Example Zoomable Circle Packing"
             subtitle="Subtitle"/>
           <CardMedia>
-            <Codepen user="Rob0h" hash="JEozrY" />
+            <CirclePacking 
+              height='960'
+              width='960'
+              data={this.state.data}
+            />
           </CardMedia>
         </Card>
 

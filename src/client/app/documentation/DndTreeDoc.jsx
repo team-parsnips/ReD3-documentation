@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import DndTree from '../dnd-tree/dndTree.jsx';
+import NpmDndTree from '../dnd-tree/npmDndTree.jsx'
 import Codepen from './Codepen.jsx';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
@@ -8,6 +9,9 @@ import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow,
 import Divider from 'material-ui/Divider';
 import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
+
+import * as d3 from 'd3';
+
 
 const propTable = [
   {
@@ -24,9 +28,11 @@ const propTable = [
   },
 ]
 
+            
 class DndTreeDoc extends Component {
   constructor() {
     super();
+    this.state = {data: window.data};
   }
 
   render() {
@@ -42,7 +48,14 @@ class DndTreeDoc extends Component {
             title="Example Drag 'n Drop Tree"
             subtitle="Subtitle"/>
           <CardMedia>
-            <DndTree />
+          <div>
+             <NpmDndTree 
+              height='2000'
+              width='960'
+              data={this.state.data}
+            />
+
+          </div>
           </CardMedia>
         </Card>
 

@@ -23,19 +23,23 @@ app.get('/csvData', function (req, res) {
 });
 
 app.get('/ReD3-logo.png', function (req, res) {
-  res.sendFile('ReD3-logo2.png', {root: __dirname});
+  res.sendFile('./images/ReD3-logo2.png', {root: __dirname});
 });
 
-app.get('/getting-started.png', function (req, res) {
-  res.sendFile('getting-started.png', {root: __dirname});
+app.get('/gettingStarted', function (req, res) {
+  res.sendFile('./images/getting-started.png', {root: __dirname});
 });
 
-app.get('/costumization.png', function (req, res) {
-  res.sendFile('costumization.png', {root: __dirname});
+app.get('/customization', function (req, res) {
+  res.sendFile('./images/customization.png', {root: __dirname});
 });
 
-app.get('/components.png', function (req, res) {
-  res.sendFile('components.png', {root: __dirname});
+app.get('/components', function (req, res) {
+  res.sendFile('./images/components.png', {root: __dirname});
+});
+
+app.get('/teamSnips', function (req, res) {
+  res.sendFile('./images/teamsnips.jpg', {root: __dirname});
 });
 
 app.use('/', express.static(path.join(__dirname, '../client')));

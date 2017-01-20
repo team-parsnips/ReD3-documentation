@@ -9,19 +9,20 @@ const styles = {
     height: '500px',
     background: 'linear-gradient(#006064, #607D8B)',
     display: 'flex',
-    'justify-content': 'center',
-    'align-items': 'center'
+    'justifyContent': 'center',
+    'alignItems': 'center'
   },
 
   logo: {
-    height: '230px',
-    width: '230px',
-    margin: '0 auto',
+    height: '170px',
+    width: '170px',
+    margin: 'auto',
+    marginTop: '15%'
   }, 
 
   text: {
     color: 'white',
-    'font-size': '25px'
+    'fontSize': '25px'
   },
 
   smallContainer: {
@@ -31,10 +32,11 @@ const styles = {
     background: '#FAFAFA'
   },
 
-  costumCard: {
-    height: '120px',
-    width: '120px',
-    margin: '0 auto',
+  customCard: {
+    height: '100px',
+    width: '100px',
+    margin: 'auto',
+    marginTop: '12%'
   },
 
   div: {
@@ -68,15 +70,15 @@ class Main extends Component {
                 title="Getting Started"
                 style={styles.cardHeader} />
              <CardMedia mediaStyle={styles.logo}>
-               <img src="./getting-started.png" />
+               <img src="./gettingStarted" />
              </CardMedia>
             </Card>
           </Link>
           <Card style={styles.smallContainer}>
             <CardHeader
               title="Customization" />
-           <CardMedia mediaStyle={styles.costumCard}>
-             <img src="./costumization.png" />
+           <CardMedia mediaStyle={styles.customCard}>
+             <img src="./customization" />
            </CardMedia>
           </Card>
           <Link to="/stackedgroupedbar">
@@ -84,7 +86,7 @@ class Main extends Component {
               <CardHeader
                 title="Components" />
              <CardMedia mediaStyle={styles.logo}>
-               <img src="./components.png" />
+               <img src="./components" />
              </CardMedia>
             </Card>
           </Link>

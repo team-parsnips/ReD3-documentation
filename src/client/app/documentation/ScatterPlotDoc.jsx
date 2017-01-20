@@ -27,6 +27,9 @@ const propTable = [
 class ScatterPlotDoc extends Component {
   constructor() {
     super();
+    this.state = {
+      data: window.scatter
+    };
   }
 
   render() {
@@ -42,7 +45,11 @@ class ScatterPlotDoc extends Component {
             title="Example Scatter Plot"
             subtitle="Subtitle"/>
           <CardMedia>
-            <ScatterPlot />
+            <ScatterPlot 
+              height='500'
+              width='960'
+              data={this.state.data}
+            />
           </CardMedia>
         </Card>
 

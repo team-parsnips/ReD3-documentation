@@ -9,13 +9,15 @@ import Divider from 'material-ui/Divider';
 import MenuItem from 'material-ui/MenuItem';
 import ArrowDropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton';
 
 const styles = {
   container: { textAlign: 'center'}
 };
 
 const muiTheme = getMuiTheme({
-  palette: { accent1Color: deepOrange500 }
+  palette: { accent1Color: deepOrange500 },
+  fontFamily: 'Linden Hill'
 });
 
 const linkStyle = {
@@ -57,6 +59,9 @@ class Navigation extends Component {
             <Divider />
             <Link to="/start" style={linkStyle}>
               <MenuItem>Get Started</MenuItem>
+            </Link>
+            <Link to="/about" style={linkStyle}>
+              <MenuItem>About</MenuItem>
             </Link>
             <MenuItem 
               primaryText="Components"
@@ -111,3 +116,5 @@ class Navigation extends Component {
 }
 
 export default Navigation;
+
+// 
